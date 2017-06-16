@@ -1,2 +1,2 @@
-# canon
-website redesign for Canon
+# web130-final
+Final project for web 130

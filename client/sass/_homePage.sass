@@ -1,0 +1,67 @@
+
+.logo
+    h1
+        display: none
+    width: 75%
+    margin: 25px auto
+    @include tablet
+        width: 50%
+    @include desktop
+        width: 50%
+.info
+    font-family: $serifFont
+    text-align: center
+    margin: auto
+    padding: 20px
+    address
+        font-size: 1.3em
+        font-weight: 700
+        margin-top: 10px
+main aside
+    font-family: $serifFont
+    padding: 20px
+    margin: 20px 0
+    clear: both
+    @include tablet
+        width: 70%
+        margin: 20px auto
+    @include desktop
+        width: 70%
+        margin: 20px auto
+    
+    img.text-dividerT
+        transform: scaleY(-1)
+
+
+img.text-divider1
+    width: 80%
+    margin: 25px 0
+
+.cta
+    box-sizing: border-box
+    margin: 20px 0
+    position: relative
+    a
+        position: absolute
+        height: 100%
+        width: 100%
+    h2
+        font-size: $cta-font-size
+        text-align: center
+        margin-top: 11%
+
+.cta1, .cta3
+    @include tablet
+        width: 49.99%
+        float: left
+    @include desktop
+        width: 49.99%
+        float: left
+
+.cta2,.cta4
+    @include tablet
+        width: 49.99%
+        float: right
+    @include desktop
+        width: 49.99%
+        float: right

@@ -1,0 +1,165 @@
+
+a
+    text-decoration: none
+    color: $white
+
+.active-nav
+    background: $blackTransparent
+
+.scrolled
+    background-color: $blackTransparent !important
+    transition: background-color 200ms linear
+
+nav
+    float: right
+    font-family: $nav-font
+    font-weight: 400
+    font-size: 1.5em
+    width: 100%
+    padding: $nav-height 0 10px
+
+    ul
+        display: none
+        list-style: none
+        // background-color: $blackTransparent
+
+        li
+            float: none
+            position: relative
+
+            a
+                display: block
+                // background: $blackTransparent
+                color: $white
+                text-decoration: none
+                text-align: center
+                padding: 15px
+                line-height: 0px
+
+                &:hover
+                    color: $link-hover-color
+
+                /* any a tag in our nav list that is NOT an only child */
+                // &:not(:only-child):after
+                    padding-left: 4px
+                    content: ' ▾'
+
+
+            ul li
+                min-width: 138px
+                a
+                    padding: 15px 15px 15px 30px
+                    line-height: 20px
+                    border: none
+
+    ul.nav-dropdown
+        position: absolute
+        z-index: 1
+        display: none
+        position: static
+        background: $whiteTransparent
+
+.nav-mobile
+    display: none
+    position: absolute
+    top: 5px
+    right: 15px
+    // background: $blackTransparent
+    height: $nav-height
+    width: $nav-height
+    display: block
+
+.nav-list
+    // border-bottom: 1px solid $white
+
+.navigation
+    height: $nav-height
+    // background: $blackTransparent
+    height: 50px
+    width: 100%
+    position: fixed
+    z-index: 2
+    //max-width: 1200px
+
+.nav-container
+    margin: 0 auto
+    display: flex
+    justify-content: center
+    // background-color: $blackTransparent
+
+.brand
+    position: absolute
+    left: 25px
+    width: 70px
+    height: 50px
+    margin-top: 15px
+    line-height: $nav-height
+    font-size: 2em
+    font-family: $nav-font
+    background-image: url('../img/canon.svg')
+    background-repeat: no-repeat
+
+    // a,
+    // a:visited
+    //     color: $nav-font-color
+    //     text-decoration: none
+        // span
+        //     width: 35px
+        //     height: 35px
+
+
+
+
+/* Elijah Manor CSS animated hamburger icon START http://codepen.io/elijahmanor/pen/Igpoe */
+#nav-toggle
+    position: absolute
+    left: 8px
+    top: 13px
+    cursor: pointer
+    padding: 10px 35px 16px 0px
+
+    span,
+    span:before,
+    span:after
+        cursor: pointer
+        border-radius: 1px
+        height: 3px
+        width: 35px
+        background: $white
+        position: absolute
+        display: block
+        content: ''
+        transition: all 300ms ease-in-out
+
+    span:before
+        top: -10px
+
+    span:after
+        bottom: -10px
+
+    &.active span
+        background-color: transparent
+        &:before,
+        &:after
+            top: 0
+
+        &:before
+            transform: rotate(45deg)
+
+        &:after
+            transform: rotate(-45deg)
+
+//Elijah Manor CSS animated hamburger icon END
+
+// Social media icons Start ////
+li.social-media
+    display: flex
+    justify-content: center
+
+a svg:hover #Facebook,
+a svg:hover #Twitter,
+a svg:hover #Instagram,
+    fill: $link-hover-color
+
+
+// Social media icons end   ////

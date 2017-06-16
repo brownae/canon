@@ -1,0 +1,248 @@
+@import cssReset
+@import fontsAndColors
+@import mediaQ
+@import nav
+@import videoBackground
+@import homePage
+
+
+img
+    width: 100%
+
+.top-img
+    width: 100%
+    // filter: grayscale(1)
+
+html
+    background-color: $navyBlue
+
+body
+    color: $white
+    font-family: $typewriter
+    line-height: 1.2em
+    width: 100%
+
+div#wrapper
+    //max-width: 1200px
+    margin: auto
+a:hover
+    color: $link-hover-color
+
+p
+    margin: 10px 0
+
+h2
+    font-size: 1.5em
+    margin: 2% 0 0 5%
+
+header
+    position: relative
+
+    div
+        left: 0
+        position: absolute
+        text-align: center
+        top: 40%
+        width: 100%
+        color: $black
+        font-size: 3em
+        h2
+            display: flex
+            justify-content: center
+            width: 30%
+            margin: auto
+            line-height: 130%
+            background: rgba(0, 0, 0, 0.8)
+            font-size: 70%
+            border: 1px solid #fff
+            color: white
+            @include tablet
+                font-size: 100%
+            @include desktop
+                font-size: 100%
+
+article
+    background: $offWhite
+    color: $black
+    padding: 20px
+    width: 80%
+    margin: 20px auto
+    overflow: auto
+    display: flex
+    flex-direction: column
+    @include tablet
+        flex-direction: row
+    @include desktop
+        flex-direction: row
+
+    h3 span, h4 span
+        font-family: $serifFont
+        font-weight: 700
+        font-size: 1.2em
+
+    .img-award
+        @extend .img-about
+        width: 50%
+
+    .img-about
+        width: 80%
+        margin: 15px auto
+        @include tablet
+            width: 30%
+            margin-right: 20px
+        @include desktop
+            width: 30%
+            margin-right: 20px
+
+
+    .content-award
+        width: 100%
+        margin: auto 0
+        @include tablet
+            width: 70%
+        @include desktop
+            width: 70%
+
+    .content-about
+        width: 100%
+        margin: auto 0
+        @include tablet
+            width: 70%
+        @include desktop
+            width: 70%
+
+main#awardsPage
+    display: flex
+    flex-direction: column
+
+main#aboutPage
+    display: flex
+    flex-direction: column-reverse
+
+button
+    display: inline-block
+    height: 38px
+    padding: 0 30px
+    color: #555
+    text-align: center
+    font-size: 11px
+    font-weight: 600
+    line-height: 38px
+    letter-spacing: .1rem
+    text-transform: uppercase
+    text-decoration: none
+    white-space: nowrap
+    background-color: $white
+    border-radius: 4px
+    border: 1px solid #bbb
+    cursor: pointer
+    box-sizing: border-box
+    &:hover
+        background-color: $darkGrey
+        color: $white
+    //&.addEntry
+        margin: 20px
+
+#admin-button
+    padding: 20px
+    width: 80%
+    margin: 20px auto
+
+
+
+form
+    @extend article
+    flex-direction: column
+
+    input
+        width: 100%
+        height: 30px
+        background-color: #f2f2f2
+        border-radius: 15px
+        border-style: none
+        padding-left: 20px
+
+
+div.form-group
+    display: block
+    width: 90%
+    height: 34px
+    padding: 6px 12px
+    font-size: 14px
+    line-height: 1.42857143
+    background-image: none
+    border-radius: 10px
+    margin: 10px auto
+    select
+        background-color: $lightGrey
+
+#adminSelector
+    margin: auto
+    width: 50%
+
+
+select
+    background: transparent
+    border: none
+    font-size: 14px
+    height: 29px
+    padding: 5px
+    width: 268px
+
+table
+    @extend article
+    background-color: $white
+    font-size: 13px
+
+    th,td
+        padding: 12px 15px
+        text-align: left
+        border-bottom: 1px solid #E1E1E1
+
+    //th:first-child, td:first-child
+        padding-left: 0
+
+    //th:last-child, td:last-child
+        padding-right: 0
+    th
+        font-family: $serifFont
+        font-weight: 600
+    td
+        a
+            color: $blue
+
+footer
+    @include desktop
+        background-color: $lightGrey
+        padding: 20px
+        overflow: auto
+        img
+            width: 50%
+            float: right
+
+.columns
+    column-width: 8em
+    @include tablet
+        column-width: 11.2em
+    @include desktop
+        column-width: 11.2em
+.utility-menu
+    background-color: $lightGrey
+    padding: 20px
+
+    @include desktop
+        width: 50%
+
+    a
+        color: $black
+    a:hover
+        color: $link-hover-color
+    ul
+        li.social-media
+            float: left
+            margin-top: 10px
+            a
+                margin-right: 10px
+
+        ul
+            padding: 0 0 0 15px
