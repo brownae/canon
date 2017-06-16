@@ -77,9 +77,7 @@ $("[name='page-select']").change(function(event){
         default:
             $('#tableContent').empty();//clears what was in div before
             // code block
-
     }
-
 });
 
 // this pops down the form to add a new about article
