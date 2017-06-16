@@ -223,6 +223,83 @@ a svg:hover #Instagram {
     .video {
       width: 100%; } }
 
+.slider {
+  width: inherit;
+  height: inherit;
+  position: relative; }
+
+.slide1, .slide2, .slide3, .slide4, .slide5 {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.slide1 {
+  background: url(../img/mobileSlides/truffle-old-fashioned-cocktail-canon-seattle.jpg) no-repeat center;
+  background-size: cover;
+  animation: fade 16s infinite;
+  animation-delay: 16s; }
+
+.slide2 {
+  background: url(../img/mobileSlides/Article-Vintage-Spirits-Historic-Cocktails-Canon-Seattle-Sole-Agent-Chicago.jpg) no-repeat center;
+  background-size: cover;
+  animation: fade2 16s infinite;
+  animation-delay: 16s; }
+
+.slide3 {
+  background: url(../img/mobileSlides/canonBookCrop.jpg) no-repeat center;
+  background-size: cover;
+  animation: fade3 16s infinite; }
+
+@keyframes fade {
+  0% {
+    opacity: 1; }
+  33.333% {
+    opacity: 0; }
+  66.666% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fade2 {
+  0% {
+    opacity: 0; }
+  33.333% {
+    opacity: 1; }
+  66.666% {
+    opacity: 0; }
+  100% {
+    opacity: 0; } }
+
+@keyframes fade3 {
+  0% {
+    opacity: 0; }
+  33.333% {
+    opacity: 0; }
+  66.666% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes fade4 {
+  0% {
+    opacity: 0; }
+  33.333% {
+    opacity: 0; }
+  66.666% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes fade5 {
+  0% {
+    opacity: 0; }
+  33.333% {
+    opacity: 0; }
+  66.666% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 .logo {
   width: 75%;
   margin: 25px auto; }
@@ -328,6 +405,8 @@ h2 {
 
 header {
   position: relative; }
+  header div.slider {
+    top: -40%; }
   header div {
     left: 0;
     position: absolute;

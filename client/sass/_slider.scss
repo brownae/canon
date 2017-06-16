@@ -1,0 +1,92 @@
+
+$animationTime: 16s;
+$animationDelay: 16s;
+
+
+.slider {
+  width: inherit;
+  height: inherit;
+  //margin: 20px auto;
+  position: relative;
+}
+.slide1,.slide2,.slide3,.slide4,.slide5 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.slide1 {
+  background: url(../img/mobileSlides/truffle-old-fashioned-cocktail-canon-seattle.jpg)no-repeat center;
+    background-size: cover;
+    animation:fade $animationTime infinite;
+    animation-delay: $animationDelay;
+
+}
+.slide2 {
+  background: url(../img/mobileSlides/Article-Vintage-Spirits-Historic-Cocktails-Canon-Seattle-Sole-Agent-Chicago.jpg)no-repeat center;
+    background-size: cover;
+    animation:fade2 $animationTime infinite;
+    animation-delay: $animationDelay;
+
+}
+.slide3 {
+    background: url(../img/mobileSlides/canonBookCrop.jpg)no-repeat center;
+    background-size: cover;
+    animation:fade3 $animationTime infinite;
+    // animation-delay: $animationDelay;
+
+}
+//Doing more than three they start to stackup and it gets buggy.
+// .slide4 {
+//     background: url(../img/mobileSlides/canonBook.jpg)no-repeat center;
+//       background-size: cover;
+//     animation:fade4 $animationTime infinite;
+// -webkit-animation:fade4 $animationTime infinite;
+// }
+// .slide5 {
+//     background: url(../img/mobileSlides/champange.jpg)no-repeat center;
+//       background-size: cover;
+//     animation:fade5 $animationTime infinite;
+// -webkit-animation:fade5 $animationTime infinite;
+// }
+@keyframes fade
+{
+  0%   {opacity:1}
+  33.333% { opacity: 0}
+  66.666% { opacity: 0}
+  100% { opacity: 1}
+}
+@keyframes fade2
+{
+  0%   {opacity:0}
+  33.333% { opacity: 1}
+  66.666% { opacity: 0 }
+  100% { opacity: 0}
+}
+@keyframes fade3
+{
+  0%   {opacity:0}
+  33.333% { opacity: 0}
+  66.666% { opacity: 1}
+  100% { opacity: 0}
+}
+@keyframes fade4
+{
+  0%   {opacity:0}
+  33.333% { opacity: 0}
+  66.666% { opacity: 1}
+  100% { opacity: 0}
+}
+@keyframes fade5
+{
+  0%   {opacity:0}
+  33.333% { opacity: 0}
+  66.666% { opacity: 1}
+  100% { opacity: 0}
+}
+
+
+// <img class="slide1" src="img/mobileSlides/truffle-old-fashioned-cocktail-canon-seattle.jpg" alt="truffle old fashioned cocktail canon seattle">
+// <img class="slide2" src="img/mobileSlides/Article-Vintage-Spirits-Historic-Cocktails-Canon-Seattle-Sole-Agent-Chicago.jpg">
+// <img class="slide3" src="img/mobileSlides/Atria-Brunette-cocktail-photo-Gary-Landsman.jpg">
+// <img class="slide4" src="img/mobileSlides/canonBook.jpg">
+// <img class="slide5" src="img/mobileSlides/champange.jpg">

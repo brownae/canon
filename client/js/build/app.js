@@ -17582,10 +17582,16 @@ $(function() { // DOM Ready
 
 $(function() {
 
-
 if(isMobileDevice() === true){
 
-    let imgHead = `<img class="top-img" src="img/truffle-old-fashioned-cocktail-canon-seattle.jpg" alt="truffle old fashioned cocktail canon seattle">`;
+    let imgHead = `
+    <div class="slider">
+        <div class='slide1'></div>
+        <div class='slide2'></div>
+        <div class='slide3'></div>
+    </div>
+
+    `;
 
     let topLogo = `<div class="logo">
         <h1>Canon whiskey and bitters emporium</h1>
@@ -17593,6 +17599,13 @@ if(isMobileDevice() === true){
 
     $('header#mainHeader').append(imgHead);
     $('main#homePage').prepend(topLogo);
+
+    //sets imgages to height of mobile device
+    $('#mainHeader').css('height', window.innerHeight+'px');
+
+    $(window).resize(function() {
+        $('#mainHeader').css('height', window.innerHeight+'px');
+    });
 
 } else {
 
@@ -17611,15 +17624,15 @@ if(isMobileDevice() === true){
     </div>`;
 
     $('header#mainHeader').append(videoHead);
-
     }
 
-});
+
+
+});//close on load function
 
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 }
-console.log(isMobileDevice());
 
 // Login query
 const loginUser = `
