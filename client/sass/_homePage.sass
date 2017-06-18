@@ -2,7 +2,7 @@
 .logo
     h1
         display: none
-        
+
     width: 75%
     margin: 25px auto
     @include tablet
@@ -38,8 +38,12 @@ img.text-divider1
     width: 80%
     margin: 25px 0
 
+.cta-wrapper
+    display: flex
+    flex-wrap: wrap
+
 .cta
-    box-sizing: border-box
+    //box-sizing: border-box
     margin: 20px 0
     position: relative
     a
@@ -53,16 +57,12 @@ img.text-divider1
 
 .cta1, .cta3
     @include tablet
-        width: 49.99%
-        float: left
+        flex: 0 0 50%
     @include desktop
-        width: 49.99%
-        float: left
+        flex: 0 0 50%
 
 .cta2,.cta4
     @include tablet
-        width: 49.99%
-        float: right
+        flex: 0 0 50%
     @include desktop
-        width: 49.99%
-        float: right
+        flex: 0 0 50%

@@ -342,8 +342,11 @@ img.text-divider1 {
   width: 80%;
   margin: 25px 0; }
 
+.cta-wrapper {
+  display: flex;
+  flex-wrap: wrap; }
+
 .cta {
-  box-sizing: border-box;
   margin: 20px 0;
   position: relative; }
   .cta a {
@@ -357,23 +360,19 @@ img.text-divider1 {
 
 @media (min-width: 680px) and (max-width: 1199px) {
   .cta1, .cta3 {
-    width: 49.99%;
-    float: left; } }
+    flex: 0 0 50%; } }
 
 @media (min-width: 1200px) {
   .cta1, .cta3 {
-    width: 49.99%;
-    float: left; } }
+    flex: 0 0 50%; } }
 
 @media (min-width: 680px) and (max-width: 1199px) {
   .cta2, .cta4 {
-    width: 49.99%;
-    float: right; } }
+    flex: 0 0 50%; } }
 
 @media (min-width: 1200px) {
   .cta2, .cta4 {
-    width: 49.99%;
-    float: right; } }
+    flex: 0 0 50%; } }
 
 img {
   width: 100%; }
