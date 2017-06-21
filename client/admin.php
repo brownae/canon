@@ -6,7 +6,7 @@
     </div>
 </header>
 <main id="admin-page">
-    <form action="#" method="post" class="">
+    <form action="#" method="post" class="adminSwitch">
         <div class="form-group" id="adminSelector">
             <label for="pageSelection">Select a page:</label>
             <select name="page-select">

@@ -526,6 +526,8 @@ form {
     border-radius: 15px;
     border-style: none;
     padding-left: 20px; }
+  form.adminSwitch {
+    height: 110px; }
 
 div.form-group {
   display: block;
@@ -541,7 +543,7 @@ div.form-group {
     background-color: #bababa; }
 
 #adminSelector {
-  margin: auto;
+  margin: 0 auto;
   width: 50%; }
 
 select {
