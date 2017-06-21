@@ -141,7 +141,6 @@ $(document).on('click', '#create-about-button', function() {
 //create a new about article End
 
 
-
 //create a new award article Start
     let createAwardInput = (imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
         return {
@@ -192,3 +191,21 @@ $(document).on('click', '#create-about-button', function() {
         });
     });
 //create a new award article End
+
+// Delete ANY entry Start ///////
+$(document).on('click', 'table a.delete', function(event){
+    event.preventDefault();
+
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
+            let aboutID = $(this).attr('id');
+            console.log(aboutID);
+            // Go to db and delete
+
+            //when sucesfully completed
+            alert('Not Deleted, not hoocked up yet'); 
+        }
+});
+
+
+// Delete About entry End ///////

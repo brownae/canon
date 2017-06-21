@@ -17323,7 +17323,7 @@ let displayAwardsTable = (award) => {
                 <td>${award.dateAwarded}</td>
                 <td>${award.comments}</td>
                 <td><a href="" id='${award.id}' >Update</a>
-                <a href="" id='${award.id}' >Delete</a></td>
+                <a href="" id='${award.id}' class='delete' >Delete</a></td>
         </tr>`;
         });
 
@@ -17388,7 +17388,7 @@ let displayAwardsForm = () => {
 // About table Start ///////////////
 let displayAboutsTable = (about) => {
     let table =
-    `<table>
+    `<table class='about'>
         <tr>
             <th>Display Order</th>
             <th>name</th>
@@ -17405,7 +17405,7 @@ let displayAboutsTable = (about) => {
                 <td>${about.content}</td>
                 <td>${about.imgName}</td>
                 <td><a href="" id='${about.id}' >Update</a>
-                <a href="" id='${about.id}' >Delete</a></td>
+                <a href="" id='${about.id}' class='delete'>Delete</a></td>
         </tr>`;
         });
 
@@ -17898,7 +17898,6 @@ $(document).on('click', '#create-about-button', function() {
 //create a new about article End
 
 
-
 //create a new award article Start
     let createAwardInput = (imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
         return {
@@ -17949,6 +17948,24 @@ $(document).on('click', '#create-about-button', function() {
         });
     });
 //create a new award article End
+
+// Delete ANY entry Start ///////
+$(document).on('click', 'table a.delete', function(event){
+    event.preventDefault();
+
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
+            let aboutID = $(this).attr('id');
+            console.log(aboutID);
+            // Go to db and delete
+
+            //when sucesfully completed
+            alert('Not Deleted, not hoocked up yet'); 
+        }
+});
+
+
+// Delete About entry End ///////
 
 $.ajax({
         type: "POST",

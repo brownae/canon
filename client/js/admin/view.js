@@ -23,7 +23,7 @@ export let displayAwardsTable = (award) => {
                 <td>${award.dateAwarded}</td>
                 <td>${award.comments}</td>
                 <td><a href="" id='${award.id}' >Update</a>
-                <a href="" id='${award.id}' >Delete</a></td>
+                <a href="" id='${award.id}' class='delete' >Delete</a></td>
         </tr>`;
         });
 
@@ -88,7 +88,7 @@ export let displayAwardsForm = () => {
 // About table Start ///////////////
 export let displayAboutsTable = (about) => {
     let table =
-    `<table>
+    `<table class='about'>
         <tr>
             <th>Display Order</th>
             <th>name</th>
@@ -105,7 +105,7 @@ export let displayAboutsTable = (about) => {
                 <td>${about.content}</td>
                 <td>${about.imgName}</td>
                 <td><a href="" id='${about.id}' >Update</a>
-                <a href="" id='${about.id}' >Delete</a></td>
+                <a href="" id='${about.id}' class='delete'>Delete</a></td>
         </tr>`;
         });
 
