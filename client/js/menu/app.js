@@ -17,7 +17,6 @@ $.ajax({
                     menus.push(menu.node);
                 }
             }
-            console.log(menus);
             displayMenus(menus);
         }
 });

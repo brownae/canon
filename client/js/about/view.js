@@ -4,7 +4,6 @@
 
 export let displayAbouts = (abouts) => {
 abouts.forEach(function(about) {
-        console.log(about);
 
         const aboutTemplate = `
         <article id='${about.displayOrder}'>

@@ -131,7 +131,6 @@ $(document).on('click', '#create-about-button', function() {
             }
         },
         error: function(xhr, status, response) {
-            console.log(response);
             if (response.hasOwnProperty('errors')) {
                 alert(response.errors[0].message);
             }
@@ -183,7 +182,6 @@ $(document).on('click', '#create-about-button', function() {
                 }
             },
             error: function(xhr, status, response) {
-                console.log(response);
                 if (response.hasOwnProperty('errors')) {
                     alert(response.errors[0].message);
                 }
@@ -199,11 +197,10 @@ $(document).on('click', 'table a.delete', function(event){
     let delConfirm = confirm('Are you sure you want to delete?');
         if (delConfirm === true){
             let aboutID = $(this).attr('id');
-            console.log(aboutID);
             // Go to db and delete
 
             //when sucesfully completed
-            alert('Not Deleted, not hoocked up yet'); 
+            alert('Not Deleted, not hoocked up yet');
         }
 });
 

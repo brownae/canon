@@ -22,7 +22,6 @@ $(function() { // DOM Ready
     $('#nav-toggle').click(function() {
         $('nav ul').toggle();
         $('nav').toggleClass('active-nav');
-        console.log('Test');
     });
 
     $(document).scroll(function () {

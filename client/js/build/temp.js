@@ -17,7 +17,6 @@ $.ajax({
                     abouts.push(about.node);
                 }
             }
-            console.log(abouts);
             displayAbouts(abouts);
         }
 });
@@ -155,7 +154,6 @@ $(document).on('click', '#create-about-button', function() {
             }
         },
         error: function(xhr, status, response) {
-            console.log(response);
             if (response.hasOwnProperty('errors')) {
                 alert(response.errors[0].message);
             }
@@ -207,7 +205,6 @@ $(document).on('click', '#create-about-button', function() {
                 }
             },
             error: function(xhr, status, response) {
-                console.log(response);
                 if (response.hasOwnProperty('errors')) {
                     alert(response.errors[0].message);
                 }
@@ -223,11 +220,10 @@ $(document).on('click', 'table a.delete', function(event){
     let delConfirm = confirm('Are you sure you want to delete?');
         if (delConfirm === true){
             let aboutID = $(this).attr('id');
-            console.log(aboutID);
             // Go to db and delete
 
             //when sucesfully completed
-            alert('Not Deleted, not hoocked up yet'); 
+            alert('Not Deleted, not hoocked up yet');
         }
 });
 
@@ -263,6 +259,22 @@ import '../homePage/homePage';
 
 import '../login/view';
 
+$(function() { //ready on load
+
+const pressed = [];
+const secretCode = 'admin';
+
+window.addEventListener('keyup', (e) => {
+    console.log(e.key);
+    pressed.push(e.key);//pushes keyup into array.
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+        if (pressed.join('').includes(secretCode)) {
+        window.location.replace("login.php");
+        }
+});
+
+});//ready on load END
+
 import { getAllMenus } from '../menu/model';
 import { displayMenus } from '../menu/view';
 
@@ -282,7 +294,6 @@ $.ajax({
                     menus.push(menu.node);
                 }
             }
-            console.log(menus);
             displayMenus(menus);
         }
 });

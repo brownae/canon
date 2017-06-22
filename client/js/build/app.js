@@ -17221,7 +17221,6 @@ const getAllAbouts = `
 
 let displayAbouts = (abouts) => {
 abouts.forEach(function(about) {
-        console.log(about);
 
         const aboutTemplate = `
         <article id='${about.displayOrder}'>
@@ -17570,7 +17569,6 @@ $(function() { // DOM Ready
     $('#nav-toggle').click(function() {
         $('nav ul').toggle();
         $('nav').toggleClass('active-nav');
-        console.log('Test');
     });
 
     $(document).scroll(function () {
@@ -17717,7 +17715,6 @@ const getAllMenus = `
 
 let displayMenus = (menus) => {
     menus.forEach(function(menu) {
-        console.log(menu);
 
         const menuTemplate = `
             <li><a href="${menu.foodUrl}" >Food</a></li>
@@ -17753,7 +17750,6 @@ $.ajax({
                     abouts.push(about.node);
                 }
             }
-            console.log(abouts);
             displayAbouts(abouts);
         }
 });
@@ -17888,7 +17884,6 @@ $(document).on('click', '#create-about-button', function() {
             }
         },
         error: function(xhr, status, response) {
-            console.log(response);
             if (response.hasOwnProperty('errors')) {
                 alert(response.errors[0].message);
             }
@@ -17940,7 +17935,6 @@ $(document).on('click', '#create-about-button', function() {
                 }
             },
             error: function(xhr, status, response) {
-                console.log(response);
                 if (response.hasOwnProperty('errors')) {
                     alert(response.errors[0].message);
                 }
@@ -17956,11 +17950,10 @@ $(document).on('click', 'table a.delete', function(event){
     let delConfirm = confirm('Are you sure you want to delete?');
         if (delConfirm === true){
             let aboutID = $(this).attr('id');
-            console.log(aboutID);
             // Go to db and delete
 
             //when sucesfully completed
-            alert('Not Deleted, not hoocked up yet'); 
+            alert('Not Deleted, not hoocked up yet');
         }
 });
 
@@ -17987,6 +17980,22 @@ $.ajax({
         }
 });
 
+$(function() { //ready on load
+
+const pressed = [];
+const secretCode = 'admin';
+
+window.addEventListener('keyup', (e) => {
+    console.log(e.key);
+    pressed.push(e.key);//pushes keyup into array.
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+        if (pressed.join('').includes(secretCode)) {
+        window.location.replace("login.php");
+        }
+});
+
+});//ready on load END
+
 $.ajax({
         type: "POST",
         url: "https://us-west-2.api.scaphold.io/graphql/canon",
@@ -18002,7 +18011,6 @@ $.ajax({
                     menus.push(menu.node);
                 }
             }
-            console.log(menus);
             displayMenus(menus);
         }
 });

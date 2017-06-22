@@ -17,7 +17,6 @@ $.ajax({
                     abouts.push(about.node);
                 }
             }
-            console.log(abouts);
             displayAbouts(abouts);
         }
 });

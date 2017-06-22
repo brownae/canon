@@ -1,7 +1,6 @@
 
 export let displayMenus = (menus) => {
     menus.forEach(function(menu) {
-        console.log(menu);
 
         const menuTemplate = `
             <li><a href="${menu.foodUrl}" >Food</a></li>
