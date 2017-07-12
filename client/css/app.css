@@ -410,26 +410,22 @@ header {
     left: 0;
     position: absolute;
     text-align: center;
-    top: 40%;
+    top: 5%;
     width: 100%;
     color: #000000;
     font-size: 3em; }
     header div h2 {
-      display: flex;
-      justify-content: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       width: 30%;
       margin: auto;
       line-height: 130%;
-      background: rgba(0, 0, 0, 0.8);
-      font-size: 70%;
-      border: 1px solid #fff;
+      font-size: 9vw;
       color: white; }
-      @media (min-width: 680px) and (max-width: 1199px) {
-        header div h2 {
-          font-size: 100%; } }
-      @media (min-width: 1200px) {
-        header div h2 {
-          font-size: 100%; } }
+    header div img.fancyLabel {
+      width: 50%; }
 
 article, form, table {
   background: #fffdf2;

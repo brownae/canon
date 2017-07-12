@@ -2,6 +2,7 @@
 <header>
     <img class="top-img" src="img/canon-seattle-about.jpg" alt="Canon Seattle bar">
     <div>
+        <img class="fancyLabel" src="img/fancyLabelAsset2.svg" alt="Awards Page label">
         <h2>Login</h2>
     </div>
 </header>

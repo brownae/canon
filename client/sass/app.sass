@@ -47,24 +47,27 @@ header
         left: 0
         position: absolute
         text-align: center
-        top: 40%
+        top: 5%
         width: 100%
         color: $black
         font-size: 3em
         h2
-            display: flex
-            justify-content: center
+            position: absolute
+            left: 50%
+            top: 50%
+            transform: translate(-50%, -50%)
             width: 30%
             margin: auto
             line-height: 130%
-            background: rgba(0, 0, 0, 0.8)
-            font-size: 70%
-            border: 1px solid #fff
+            font-size: 9vw
             color: white
             @include tablet
-                font-size: 100%
+                //font-size: 100%
             @include desktop
-                font-size: 100%
+                //font-size: 100%
+
+        img.fancyLabel
+            width: 50%
 
 article
     background: $offWhite
