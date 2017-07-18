@@ -1,5 +1,5 @@
-import { createAbout, createAward } from '../admin/model.js';
-import {displayAwardsTable, displayAboutsTable, displayMenuForm, displayAboutForm, displayAwardsForm } from '../admin/view.js';
+import { createAbout, createAward, getAboutsById } from '../admin/model.js';
+import {displayAwardsTable, displayAboutsTable, displayMenuForm, displayAboutForm, displayAwardsForm, displayUpdateAboutForm } from '../admin/view.js';
 
 $("[name='page-select']").change(function(event){
 
@@ -82,11 +82,11 @@ $("[name='page-select']").change(function(event){
 
 // this pops down the form to add a new about article
 $(document).on('click', "#add-about-form", function() {
-    displayAboutForm();
+    displayNewAboutForm();
 });
 // this pops down the form to add a new award
 $(document).on('click', "#add-award-form", function() {
-    displayAwardsForm();
+    displayNewAwardsForm();
 });
 
 
@@ -138,6 +138,36 @@ $(document).on('click', '#create-about-button', function() {
     });
 });
 //create a new about article End
+
+
+let createAboutIdInput = (id) => {//this formats the data for the graphql query to use.
+    return {
+            "input": id
+    };
+};
+//Update about article form Start
+$(document).on('click', '.updateAbout', function(e) {
+    e.preventDefault();
+    let id = $(this).attr('id'),
+        data = createAboutIdInput(id);
+
+        $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: getAboutsById,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    //console.log(response);
+                    abouts = response.data.getAbout ;
+
+                    displayUpdateAboutForm(abouts);
+                }
+        });
+});
+//Update about article End
 
 
 //create a new award article Start

@@ -17261,7 +17261,26 @@ const createAbout = `
         }
     }`;
 
-//make this create new award
+//Delete about
+
+//Update about
+
+
+//get about with id
+const getAboutsById = `
+query getAboutsById($input: ID!) {
+  getAbout(id: $input) {
+    id
+    modifiedAt
+    displayOrder
+    name
+    title
+    content
+    imgName
+  }
+}`;
+
+//create new award
 const createAward = `
     mutation createAwardQuery($input: CreateAwardInput!) {
         createAward(input: $input) {
@@ -17279,24 +17298,15 @@ const createAward = `
         }
     }`;
 
+    //Delete award
+    
+
+    // Update award
+    
+
+
+
     // Use this to base your UPDATE menu query
-    // export const getAllMenus = `
-    //     mutation getAllmenus {
-    //         viewer {
-    //             allMenus{
-    //                 edges {
-    //                     node {
-    //                         id
-    //                         modifiedAt
-    //                         createdAt
-    //                         bottlesUrl
-    //                         foodUrl
-    //                         cocktailsUrl
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }`;
 
 // Awards table Start ///////////////
 //the displayAwardsTable function is what makes the view for awards on the admin page.
@@ -17337,49 +17347,7 @@ let displayAwardsTable = (award) => {
 };
 // Awards table End ///////////////
 // Awards form Start ///////////////
-let displayAwardsForm = () => {
 
-        let form = `
-            <form action="#" method="post" class="">
-                <div class="form-group">
-                    <label for="imgName">Name of img</label>
-                    <input type="text" class="form-control" id="imgName" name="imgName" placeholder="example: beard-award-logo.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="awardTitle">Award title</label>
-                    <input type="text" class="form-control" id="awardTitle" name="awardTitle" placeholder="example: Best Cocktail Bar in the World">
-                </div>
-
-                <div class="form-group">
-                    <label for="awardFrom">Award from</label>
-                    <input type="text" class="form-control" id="awardFrom" name="awardFrom" placeholder="example: James Beard Foundation">
-                </div>
-
-                <div class="form-group">
-                    <label for="awardSrcUrl">Url of award page</label>
-                    <input type="url" class="form-control" id="awardSrcUrl" name="awardSrcUrl" placeholder="example: https://www.jamesbeardfoundation.com/awardPage">
-                </div>
-
-                <div class="form-group">
-                    <label for="dateAwarded">Date awarded</label>
-                    <input type="text" class="form-control" id="dateAwarded" name="dateAwarded" placeholder="Month Year... June 2016">
-                </div>
-
-                <div class="form-group">
-                    <label for="comments">Comments</label>
-                    <input type="text" class="form-control" id="comments" name="comments" placeholder="Comments">
-                </div>
-
-                <div class="form-group">
-                    <button id="create-award-button" type="button">Update</button>
-                </div>
-            </form>`;
-
-    $('#tableContent').append(form);//loads what is requested
-
-
-};
 // Awards form End ///////////////
 
 
@@ -17403,7 +17371,7 @@ let displayAboutsTable = (about) => {
                 <td>${about.title}</td>
                 <td>${about.content}</td>
                 <td>${about.imgName}</td>
-                <td><a href="" id='${about.id}' >Update</a>
+                <td><a href="" id='${about.id}' class='updateAbout'>Update</a>
                 <a href="" id='${about.id}' class='delete'>Delete</a></td>
         </tr>`;
         });
@@ -17419,37 +17387,39 @@ let displayAboutsTable = (about) => {
 };
 // About table End ///////////////
 // About form Start ///////////////
-let displayAboutForm = () => {
+
+// NEW About form END ///////////////
+let displayUpdateAboutForm = (about) => {
 
         let form = `
             <form action="#" method="post" class="">
                 <div class="form-group">
                     <label for="displayOrder">Display Order</label>
-                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" placeholder="(Number)">
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" value="${about.displayOrder}">
                 </div>
 
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Persons Name">
+                    <input type="text" class="form-control" id="name" name="name" value="${about.name}">
                 </div>
 
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Title - 'i.e. Chef... Manager">
+                    <input type="text" class="form-control" id="title" name="title" value="${about.title}">
                 </div>
 
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <input type="url" class="form-control" id="content" name="content" placeholder="Content...">
+                    <input type="url" class="form-control" id="content" name="content" value="${about.content}">
                 </div>
 
                 <div class="form-group">
                     <label for="imgName">Image Name</label>
-                    <input type="url" class="form-control" id="imgName" name="imgName" placeholder="john-johnson.jpg">
+                    <input type="url" class="form-control" id="imgName" name="imgName" value="${about.imgName}">
                 </div>
 
                 <div class="form-group">
-                    <button id="create-about-button" type="button">Update</button>
+                    <button class="update" id="${about.id}" type="button">Update</button>
                 </div>
             </form>`;
 
@@ -17457,7 +17427,7 @@ let displayAboutForm = () => {
 
 
 };
-// About form END ///////////////
+// UPDATE About form END ///////////////
 
 
 // menu form Start ///////////////
@@ -17834,11 +17804,11 @@ $("[name='page-select']").change(function(event){
 
 // this pops down the form to add a new about article
 $(document).on('click', "#add-about-form", function() {
-    displayAboutForm();
+    displayNewAboutForm();
 });
 // this pops down the form to add a new award
 $(document).on('click', "#add-award-form", function() {
-    displayAwardsForm();
+    displayNewAwardsForm();
 });
 
 
@@ -17890,6 +17860,36 @@ $(document).on('click', '#create-about-button', function() {
     });
 });
 //create a new about article End
+
+
+let createAboutIdInput = (id) => {//this formats the data for the graphql query to use.
+    return {
+            "input": id
+    };
+};
+//Update about article form Start
+$(document).on('click', '.updateAbout', function(e) {
+    e.preventDefault();
+    let id = $(this).attr('id'),
+        data = createAboutIdInput(id);
+
+        $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: getAboutsById,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    //console.log(response);
+                    abouts = response.data.getAbout ;
+
+                    displayUpdateAboutForm(abouts);
+                }
+        });
+});
+//Update about article End
 
 
 //create a new award article Start

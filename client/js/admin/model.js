@@ -26,22 +26,37 @@ export const deleteAbout = `
             }
         }
     }
-`
+`;
 //Update about
 export const updateAbout = `
     mutation updateAboutQuery($input: UpdateAboutInput!) {
         updateAbout(input: $input) {
             changedAbout {
                 id
-                modifiedAt
-                title
-                imgName
                 displayOrder
+                modifiedAt
+                name
+                title
                 content
+                imgName
             }
         }
     }
-`
+`;
+
+//get about with id
+export const getAboutsById = `
+query getAboutsById($input: ID!) {
+  getAbout(id: $input) {
+    id
+    modifiedAt
+    displayOrder
+    name
+    title
+    content
+    imgName
+  }
+}`;
 
 //create new award
 export const createAward = `

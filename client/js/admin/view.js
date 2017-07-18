@@ -38,7 +38,7 @@ export let displayAwardsTable = (award) => {
 };
 // Awards table End ///////////////
 // Awards form Start ///////////////
-export let displayAwardsForm = () => {
+export let displayNewAwardsForm = () => {
 
         let form = `
             <form action="#" method="post" class="">
@@ -104,7 +104,7 @@ export let displayAboutsTable = (about) => {
                 <td>${about.title}</td>
                 <td>${about.content}</td>
                 <td>${about.imgName}</td>
-                <td><a href="" id='${about.id}' >Update</a>
+                <td><a href="" id='${about.id}' class='updateAbout'>Update</a>
                 <a href="" id='${about.id}' class='delete'>Delete</a></td>
         </tr>`;
         });
@@ -120,7 +120,7 @@ export let displayAboutsTable = (about) => {
 };
 // About table End ///////////////
 // About form Start ///////////////
-export let displayAboutForm = () => {
+export let displayNewAboutForm = () => {
 
         let form = `
             <form action="#" method="post" class="">
@@ -158,7 +158,46 @@ export let displayAboutForm = () => {
 
 
 };
-// About form END ///////////////
+// NEW About form END ///////////////
+export let displayUpdateAboutForm = (about) => {
+
+        let form = `
+            <form action="#" method="post" class="">
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" value="${about.displayOrder}">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="${about.name}">
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="${about.title}">
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <input type="url" class="form-control" id="content" name="content" value="${about.content}">
+                </div>
+
+                <div class="form-group">
+                    <label for="imgName">Image Name</label>
+                    <input type="url" class="form-control" id="imgName" name="imgName" value="${about.imgName}">
+                </div>
+
+                <div class="form-group">
+                    <button class="update" id="${about.id}" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
+// UPDATE About form END ///////////////
 
 
 // menu form Start ///////////////
