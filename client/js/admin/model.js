@@ -17,7 +17,33 @@ export const createAbout = `
         }
     }`;
 
-//make this create new award
+//Delete about
+export const deleteAbout = `
+    mutation deleteAboutQuery($input: DeleteAboutInput!) {
+        deleteAbout(input: $input) {
+            changedAbout {
+                id
+            }
+        }
+    }
+`
+//Update about
+export const updateAbout = `
+    mutation updateAboutQuery($input: UpdateAboutInput!) {
+        updateAbout(input: $input) {
+            changedAbout {
+                id
+                modifiedAt
+                title
+                imgName
+                displayOrder
+                content
+            }
+        }
+    }
+`
+
+//create new award
 export const createAward = `
     mutation createAwardQuery($input: CreateAwardInput!) {
         createAward(input: $input) {
@@ -35,21 +61,45 @@ export const createAward = `
         }
     }`;
 
+    //Delete award
+    export const deleteAward = `
+        mutation deleteAwardQuery($input: DeleteAwardInput!) {
+            deleteAward(input: $input) {
+                changeAward {
+                    id
+                }
+            }
+        }`;
+
+    // Update award
+    export const updateAward = `
+        mutation updateAwardQuery($input: UpdateAwardInput!) {
+            updateAward(input: $input) {
+                changedAward {
+                    id
+                    modifiedAt
+                    imgName
+                    awardTitle
+                    awardFrom
+                    awardSrcUrl
+                    dateAwarded
+                    comments
+                }
+            }
+        }`;
+
+
+
     // Use this to base your UPDATE menu query
-    // export const getAllMenus = `
-    //     mutation getAllmenus {
-    //         viewer {
-    //             allMenus{
-    //                 edges {
-    //                     node {
-    //                         id
-    //                         modifiedAt
-    //                         createdAt
-    //                         bottlesUrl
-    //                         foodUrl
-    //                         cocktailsUrl
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }`;
+    export const updateAllMenus = `
+    mutation updateAllmenus($input:UpdateMenuInput!){
+      updateMenu(input:$input){
+        changedMenu{
+            id
+            modifiedAt
+            bottlesUrl
+            foodUrl
+            cocktailsUrl
+        }
+      }
+    }`;
