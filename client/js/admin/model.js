@@ -34,11 +34,11 @@ export const updateAbout = `
             changedAbout {
                 id
                 displayOrder
-                modifiedAt
                 name
                 title
                 content
                 imgName
+                modifiedAt
             }
         }
     }

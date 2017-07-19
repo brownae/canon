@@ -31,6 +31,7 @@ export let displayAwardsTable = (award) => {
         <div id='admin-button'>
         <button type='button' name='update-button' id='add-award-form' class='addEntry'>Add</button>
         <div>
+        <a name="form">
         `;
 
     $('#tableContent').append(table);//loads what is requested
@@ -113,6 +114,7 @@ export let displayAboutsTable = (about) => {
         <div id='admin-button'>
         <button type="button" name="add-about-form" id="add-about-form" class='addEntry' >Add</button>
         <div>
+        <a name="form">
         `;
 
     $('#tableContent').append(table);//loads what is requested
@@ -163,6 +165,7 @@ export let displayUpdateAboutForm = (about) => {
 
         let form = `
             <form action="#" method="post" class="">
+            <h2>Update: ${about.name}<h2>
                 <div class="form-group">
                     <label for="displayOrder">Display Order</label>
                     <input type="url" class="form-control" id="displayOrder" name="displayOrder" value="${about.displayOrder}">
@@ -189,7 +192,7 @@ export let displayUpdateAboutForm = (about) => {
                 </div>
 
                 <div class="form-group">
-                    <button class="update" id="${about.id}" type="button">Update</button>
+                    <button class="update" data-id="${about.id}" type="button">Update</button>
                 </div>
             </form>`;
 

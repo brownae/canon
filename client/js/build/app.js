@@ -17264,7 +17264,21 @@ const createAbout = `
 //Delete about
 
 //Update about
-
+const updateAbout = `
+    mutation updateAboutQuery($input: UpdateAboutInput!) {
+        updateAbout(input: $input) {
+            changedAbout {
+                id
+                displayOrder
+                name
+                title
+                content
+                imgName
+                modifiedAt
+            }
+        }
+    }
+`;
 
 //get about with id
 const getAboutsById = `
@@ -17340,6 +17354,7 @@ let displayAwardsTable = (award) => {
         <div id='admin-button'>
         <button type='button' name='update-button' id='add-award-form' class='addEntry'>Add</button>
         <div>
+        <a name="form">
         `;
 
     $('#tableContent').append(table);//loads what is requested
@@ -17380,6 +17395,7 @@ let displayAboutsTable = (about) => {
         <div id='admin-button'>
         <button type="button" name="add-about-form" id="add-about-form" class='addEntry' >Add</button>
         <div>
+        <a name="form">
         `;
 
     $('#tableContent').append(table);//loads what is requested
@@ -17393,6 +17409,7 @@ let displayUpdateAboutForm = (about) => {
 
         let form = `
             <form action="#" method="post" class="">
+            <h2>Update: ${about.name}<h2>
                 <div class="form-group">
                     <label for="displayOrder">Display Order</label>
                     <input type="url" class="form-control" id="displayOrder" name="displayOrder" value="${about.displayOrder}">
@@ -17419,7 +17436,7 @@ let displayUpdateAboutForm = (about) => {
                 </div>
 
                 <div class="form-group">
-                    <button class="update" id="${about.id}" type="button">Update</button>
+                    <button class="update" data-id="${about.id}" type="button">Update</button>
                 </div>
             </form>`;
 
@@ -17811,8 +17828,8 @@ $(document).on('click', "#add-award-form", function() {
     displayNewAwardsForm();
 });
 
-
-//create a new about article Start
+// ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
+//CREATE a new about article Start
 let createAboutInput = (displayOrder, name, title, content, imgName) => {
     return {
         "input": {
@@ -17861,13 +17878,13 @@ $(document).on('click', '#create-about-button', function() {
 });
 //create a new about article End
 
-
+//UPDATE FORM about article Start
 let createAboutIdInput = (id) => {//this formats the data for the graphql query to use.
     return {
             "input": id
     };
 };
-//Update about article form Start
+
 $(document).on('click', '.updateAbout', function(e) {
     e.preventDefault();
     let id = $(this).attr('id'),
@@ -17886,10 +17903,66 @@ $(document).on('click', '.updateAbout', function(e) {
                     abouts = response.data.getAbout ;
 
                     displayUpdateAboutForm(abouts);
+                    location.href = "#form";
+
                 }
         });
 });
-//Update about article End
+//UPDATE FORM about article End
+
+//UPDATE about article Start
+let updateAboutInput = (id,displayOrder, name, title, content, imgName) => {
+    return {
+        "input": {
+            "id": id,
+            "displayOrder": displayOrder,
+            "name": name,
+            "title": title,
+            "content": content,
+            "imgName": imgName
+        }
+    };
+};
+
+$(document).on('click', 'button.update', function() {
+    //NOTE these do not match the location on the form!
+    let id = $(".update").data("id"),
+        displayOrder = $('#displayOrder').val(),
+        name = $('#name').val(),
+        title = $('#title').val(),
+        content = $('#content').val(),
+        imgName = $('#imgName').val(),
+        data = updateAboutInput(id,displayOrder, name, title, content, imgName);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: updateAbout,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('Updated!');
+                $('form')[0].reset();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//UPDATE about article End
+
+//DELETE About article
+
+// ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
 
 
 //create a new award article Start
@@ -17981,17 +18054,19 @@ $.ajax({
 
 $(function() { //ready on load
 
-const pressed = [];
-const secretCode = 'admin';
+    if (location.pathname.substring(location.pathname.lastIndexOf("/") + 1) != "admin.php"){
+        const pressed = [];
+        const secretCode = 'admin';
 
-window.addEventListener('keyup', (e) => {
-    console.log(e.key);
-    pressed.push(e.key);//pushes keyup into array.
-    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
-        if (pressed.join('').includes(secretCode)) {
-        window.location.replace("login.php");
-        }
-});
+        window.addEventListener('keyup', (e) => {
+            console.log(e.key);
+            pressed.push(e.key);//pushes keyup into array.
+            pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+                if (pressed.join('').includes(secretCode)) {
+                window.location.replace("login.php");
+                }
+        });
+    }
 
 });//ready on load END
 

@@ -1,4 +1,4 @@
-import { createAbout, createAward, getAboutsById } from '../admin/model.js';
+import { createAbout, createAward, getAboutsById, updateAbout } from '../admin/model.js';
 import {displayAwardsTable, displayAboutsTable, displayMenuForm, displayAboutForm, displayAwardsForm, displayUpdateAboutForm } from '../admin/view.js';
 
 $("[name='page-select']").change(function(event){
@@ -89,8 +89,8 @@ $(document).on('click', "#add-award-form", function() {
     displayNewAwardsForm();
 });
 
-
-//create a new about article Start
+// ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
+//CREATE a new about article Start
 let createAboutInput = (displayOrder, name, title, content, imgName) => {
     return {
         "input": {
@@ -139,13 +139,13 @@ $(document).on('click', '#create-about-button', function() {
 });
 //create a new about article End
 
-
+//UPDATE FORM about article Start
 let createAboutIdInput = (id) => {//this formats the data for the graphql query to use.
     return {
             "input": id
     };
 };
-//Update about article form Start
+
 $(document).on('click', '.updateAbout', function(e) {
     e.preventDefault();
     let id = $(this).attr('id'),
@@ -164,10 +164,66 @@ $(document).on('click', '.updateAbout', function(e) {
                     abouts = response.data.getAbout ;
 
                     displayUpdateAboutForm(abouts);
+                    location.href = "#form";
+
                 }
         });
 });
-//Update about article End
+//UPDATE FORM about article End
+
+//UPDATE about article Start
+let updateAboutInput = (id,displayOrder, name, title, content, imgName) => {
+    return {
+        "input": {
+            "id": id,
+            "displayOrder": displayOrder,
+            "name": name,
+            "title": title,
+            "content": content,
+            "imgName": imgName
+        }
+    };
+};
+
+$(document).on('click', 'button.update', function() {
+    //NOTE these do not match the location on the form!
+    let id = $(".update").data("id"),
+        displayOrder = $('#displayOrder').val(),
+        name = $('#name').val(),
+        title = $('#title').val(),
+        content = $('#content').val(),
+        imgName = $('#imgName').val(),
+        data = updateAboutInput(id,displayOrder, name, title, content, imgName);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: updateAbout,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('Updated!');
+                $('form')[0].reset();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//UPDATE about article End
+
+//DELETE About article
+
+// ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
 
 
 //create a new award article Start
