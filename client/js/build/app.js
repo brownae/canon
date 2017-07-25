@@ -17262,7 +17262,15 @@ const createAbout = `
     }`;
 
 //Delete about
-
+const deleteAbout = `
+mutation deleteAboutQuery($input: DeleteAboutInput!) {
+  deleteAbout(input: $input) {
+    changedAbout {
+      id
+    }
+  }
+}
+`;
 //Update about
 const updateAbout = `
     mutation updateAboutQuery($input: UpdateAboutInput!) {
@@ -17326,7 +17334,7 @@ const createAward = `
 //the displayAwardsTable function is what makes the view for awards on the admin page.
 let displayAwardsTable = (award) => {
     let table =
-    `<table>
+    `<table class='Award'> <!-- Keep class capitalized -->
         <tr>
             <th>Award Title</th>
             <th>Img URL</th>
@@ -17362,7 +17370,50 @@ let displayAwardsTable = (award) => {
 };
 // Awards table End ///////////////
 // Awards form Start ///////////////
+let displayNewAwardsForm = () => {
 
+        let form = `
+            <form action="#" method="post" class="">
+
+                <div class="form-group">
+                    <label for="awardTitle">Award title</label>
+                    <input type="text" class="form-control" id="awardTitle" name="awardTitle" placeholder="example: Best Cocktail Bar in the World">
+                </div>
+
+                <div class="form-group">
+                    <label for="imgName">Name of img</label>
+                    <input type="text" class="form-control" id="imgName" name="imgName" placeholder="example: beard-award-logo.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="awardFrom">Award from</label>
+                    <input type="text" class="form-control" id="awardFrom" name="awardFrom" placeholder="example: James Beard Foundation">
+                </div>
+
+                <div class="form-group">
+                    <label for="awardSrcUrl">Url of award page</label>
+                    <input type="url" class="form-control" id="awardSrcUrl" name="awardSrcUrl" placeholder="example: https://www.jamesbeardfoundation.com/awardPage">
+                </div>
+
+                <div class="form-group">
+                    <label for="dateAwarded">Date awarded</label>
+                    <input type="text" class="form-control" id="dateAwarded" name="dateAwarded" placeholder="Month Year... June 2016">
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Comments</label>
+                    <input type="text" class="form-control" id="comments" name="comments" placeholder="Comments">
+                </div>
+
+                <div class="form-group">
+                    <button id="create-award-button" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
 // Awards form End ///////////////
 
 
@@ -17370,7 +17421,7 @@ let displayAwardsTable = (award) => {
 // About table Start ///////////////
 let displayAboutsTable = (about) => {
     let table =
-    `<table class='about'>
+    `<table class='About'><!-- Keep class capitalized -->
         <tr>
             <th>Display Order</th>
             <th>name</th>
@@ -17403,7 +17454,44 @@ let displayAboutsTable = (about) => {
 };
 // About table End ///////////////
 // About form Start ///////////////
+let displayNewAboutForm = () => {
 
+        let form = `
+            <form action="#" method="post" class="">
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" placeholder="(Number)">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Persons Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Title - 'i.e. Chef... Manager">
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <input type="url" class="form-control" id="content" name="content" placeholder="Content...">
+                </div>
+
+                <div class="form-group">
+                    <label for="imgName">Image Name</label>
+                    <input type="url" class="form-control" id="imgName" name="imgName" placeholder="john-johnson.jpg">
+                </div>
+
+                <div class="form-group">
+                    <button id="create-about-button" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
 // NEW About form END ///////////////
 let displayUpdateAboutForm = (about) => {
 
@@ -17819,16 +17907,14 @@ $("[name='page-select']").change(function(event){
     }
 });
 
+
+// START - ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
+
 // this pops down the form to add a new about article
 $(document).on('click', "#add-about-form", function() {
     displayNewAboutForm();
 });
-// this pops down the form to add a new award
-$(document).on('click', "#add-award-form", function() {
-    displayNewAwardsForm();
-});
 
-// ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
 //CREATE a new about article Start
 let createAboutInput = (displayOrder, name, title, content, imgName) => {
     return {
@@ -17866,7 +17952,7 @@ $(document).on('click', '#create-about-button', function() {
         success: function(response) {
             if (response.hasOwnProperty('data')) {
                 alert('You created a new about section!');
-                $('form')[0].reset();
+                location.reload();
             }
         },
         error: function(xhr, status, response) {
@@ -17960,10 +18046,61 @@ $(document).on('click', 'button.update', function() {
 });
 //UPDATE about article End
 
-//DELETE About article
+//DELETE About article Start
+$(document).on('click', 'a.delete', function(event){
+    event.preventDefault();
 
-// ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
 
+            // Go to db and delete
+            let deleteInput = (id) => {
+                return {
+                    "input": {
+                        "id": id
+                    }
+                };
+            };
+
+            let id = $(this).attr('id'),
+                data = deleteInput(id);
+
+            $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: deleteAbout,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + Cookies.get('token')
+                },
+                success: function(response) {
+                    if (response.hasOwnProperty('data')) {
+                        alert('Deleted!');
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, response) {
+                    if (response.hasOwnProperty('errors')) {
+                        alert(response.errors[0].message);
+                    }
+                }
+            });
+        }
+});
+//DELETE About article End
+
+// END - ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
+
+
+
+// START - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD
+// this pops down the form to add a new award
+$(document).on('click', "#add-award-form", function() {
+    displayNewAwardsForm();
+});
 
 //create a new award article Start
     let createAwardInput = (imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
@@ -18003,7 +18140,7 @@ $(document).on('click', 'button.update', function() {
             success: function(response) {
                 if (response.hasOwnProperty('data')) {
                     alert('You created a new award section!');
-                    $('form')[0].reset();
+                    location.reload();
                 }
             },
             error: function(xhr, status, response) {
@@ -18015,22 +18152,7 @@ $(document).on('click', 'button.update', function() {
     });
 //create a new award article End
 
-// Delete ANY entry Start ///////
-$(document).on('click', 'table a.delete', function(event){
-    event.preventDefault();
-
-    let delConfirm = confirm('Are you sure you want to delete?');
-        if (delConfirm === true){
-            let aboutID = $(this).attr('id');
-            // Go to db and delete
-
-            //when sucesfully completed
-            alert('Not Deleted, not hoocked up yet');
-        }
-});
-
-
-// Delete About entry End ///////
+// END - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD
 
 $.ajax({
         type: "POST",

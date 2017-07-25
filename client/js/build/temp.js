@@ -21,8 +21,8 @@ $.ajax({
         }
 });
 
-import { createAbout, createAward, getAboutsById, updateAbout } from '../admin/model.js';
-import {displayAwardsTable, displayAboutsTable, displayMenuForm, displayAboutForm, displayAwardsForm, displayUpdateAboutForm } from '../admin/view.js';
+import { createAward, createAbout, getAboutsById, updateAbout, deleteAbout } from '../admin/model.js';
+import {displayAwardsTable, displayNewAwardsForm, displayAboutsTable, displayMenuForm, displayNewAboutForm, displayUpdateAboutForm } from '../admin/view.js';
 
 $("[name='page-select']").change(function(event){
 
@@ -103,16 +103,14 @@ $("[name='page-select']").change(function(event){
     }
 });
 
+
+// START - ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
+
 // this pops down the form to add a new about article
 $(document).on('click', "#add-about-form", function() {
     displayNewAboutForm();
 });
-// this pops down the form to add a new award
-$(document).on('click', "#add-award-form", function() {
-    displayNewAwardsForm();
-});
 
-// ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
 //CREATE a new about article Start
 let createAboutInput = (displayOrder, name, title, content, imgName) => {
     return {
@@ -150,7 +148,7 @@ $(document).on('click', '#create-about-button', function() {
         success: function(response) {
             if (response.hasOwnProperty('data')) {
                 alert('You created a new about section!');
-                $('form')[0].reset();
+                location.reload();
             }
         },
         error: function(xhr, status, response) {
@@ -244,10 +242,61 @@ $(document).on('click', 'button.update', function() {
 });
 //UPDATE about article End
 
-//DELETE About article
+//DELETE About article Start
+$(document).on('click', 'a.delete', function(event){
+    event.preventDefault();
 
-// ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
 
+            // Go to db and delete
+            let deleteInput = (id) => {
+                return {
+                    "input": {
+                        "id": id
+                    }
+                };
+            };
+
+            let id = $(this).attr('id'),
+                data = deleteInput(id);
+
+            $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: deleteAbout,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + Cookies.get('token')
+                },
+                success: function(response) {
+                    if (response.hasOwnProperty('data')) {
+                        alert('Deleted!');
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, response) {
+                    if (response.hasOwnProperty('errors')) {
+                        alert(response.errors[0].message);
+                    }
+                }
+            });
+        }
+});
+//DELETE About article End
+
+// END - ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT *** ABOUT
+
+
+
+// START - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD
+// this pops down the form to add a new award
+$(document).on('click', "#add-award-form", function() {
+    displayNewAwardsForm();
+});
 
 //create a new award article Start
     let createAwardInput = (imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
@@ -287,7 +336,7 @@ $(document).on('click', 'button.update', function() {
             success: function(response) {
                 if (response.hasOwnProperty('data')) {
                     alert('You created a new award section!');
-                    $('form')[0].reset();
+                    location.reload();
                 }
             },
             error: function(xhr, status, response) {
@@ -299,22 +348,7 @@ $(document).on('click', 'button.update', function() {
     });
 //create a new award article End
 
-// Delete ANY entry Start ///////
-$(document).on('click', 'table a.delete', function(event){
-    event.preventDefault();
-
-    let delConfirm = confirm('Are you sure you want to delete?');
-        if (delConfirm === true){
-            let aboutID = $(this).attr('id');
-            // Go to db and delete
-
-            //when sucesfully completed
-            alert('Not Deleted, not hoocked up yet');
-        }
-});
-
-
-// Delete About entry End ///////
+// END - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD
 
 import { getAllAwards } from '../award/model';
 import { displayAwards } from '../award/view';

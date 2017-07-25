@@ -3,7 +3,7 @@
 //the displayAwardsTable function is what makes the view for awards on the admin page.
 export let displayAwardsTable = (award) => {
     let table =
-    `<table>
+    `<table class='Award'> <!-- Keep class capitalized -->
         <tr>
             <th>Award Title</th>
             <th>Img URL</th>
@@ -43,14 +43,15 @@ export let displayNewAwardsForm = () => {
 
         let form = `
             <form action="#" method="post" class="">
-                <div class="form-group">
-                    <label for="imgName">Name of img</label>
-                    <input type="text" class="form-control" id="imgName" name="imgName" placeholder="example: beard-award-logo.jpg">
-                </div>
 
                 <div class="form-group">
                     <label for="awardTitle">Award title</label>
                     <input type="text" class="form-control" id="awardTitle" name="awardTitle" placeholder="example: Best Cocktail Bar in the World">
+                </div>
+
+                <div class="form-group">
+                    <label for="imgName">Name of img</label>
+                    <input type="text" class="form-control" id="imgName" name="imgName" placeholder="example: beard-award-logo.jpg">
                 </div>
 
                 <div class="form-group">
@@ -89,7 +90,7 @@ export let displayNewAwardsForm = () => {
 // About table Start ///////////////
 export let displayAboutsTable = (about) => {
     let table =
-    `<table class='about'>
+    `<table class='About'><!-- Keep class capitalized -->
         <tr>
             <th>Display Order</th>
             <th>name</th>

@@ -19,13 +19,13 @@ export const createAbout = `
 
 //Delete about
 export const deleteAbout = `
-    mutation deleteAboutQuery($input: DeleteAboutInput!) {
-        deleteAbout(input: $input) {
-            changedAbout {
-                id
-            }
-        }
+mutation deleteAboutQuery($input: DeleteAboutInput!) {
+  deleteAbout(input: $input) {
+    changedAbout {
+      id
     }
+  }
+}
 `;
 //Update about
 export const updateAbout = `
