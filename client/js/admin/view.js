@@ -1,92 +1,4 @@
-
-// Awards table Start ///////////////
-//the displayAwardsTable function is what makes the view for awards on the admin page.
-export let displayAwardsTable = (award) => {
-    let table =
-    `<table class='Award'> <!-- Keep class capitalized -->
-        <tr>
-            <th>Award Title</th>
-            <th>Img URL</th>
-            <th>From</th>
-            <th>Award src URL</th>
-            <th>Date Awarded</th>
-            <th>comments</th>
-
-        </tr>`;
-
-        awards.forEach(function(award) {
-        table +=  `<tr>
-                <td>${award.awardTitle}</td>
-                <td>${award.imgName}</td>
-                <td>${award.awardFrom}</td>
-                <td>${award.awardSrcUrl}</td>
-                <td>${award.dateAwarded}</td>
-                <td>${award.comments}</td>
-                <td><a href="" id='${award.id}' >Update</a>
-                <a href="" id='${award.id}' class='delete' >Delete</a></td>
-        </tr>`;
-        });
-
-        table += `</table>
-        <div id='admin-button'>
-        <button type='button' name='update-button' id='add-award-form' class='addEntry'>Add</button>
-        <div>
-        <a name="form">
-        `;
-
-    $('#tableContent').append(table);//loads what is requested
-
-};
-// Awards table End ///////////////
-// Awards form Start ///////////////
-export let displayNewAwardsForm = () => {
-
-        let form = `
-            <form action="#" method="post" class="">
-
-                <div class="form-group">
-                    <label for="awardTitle">Award title</label>
-                    <input type="text" class="form-control" id="awardTitle" name="awardTitle" placeholder="example: Best Cocktail Bar in the World">
-                </div>
-
-                <div class="form-group">
-                    <label for="imgName">Name of img</label>
-                    <input type="text" class="form-control" id="imgName" name="imgName" placeholder="example: beard-award-logo.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="awardFrom">Award from</label>
-                    <input type="text" class="form-control" id="awardFrom" name="awardFrom" placeholder="example: James Beard Foundation">
-                </div>
-
-                <div class="form-group">
-                    <label for="awardSrcUrl">Url of award page</label>
-                    <input type="url" class="form-control" id="awardSrcUrl" name="awardSrcUrl" placeholder="example: https://www.jamesbeardfoundation.com/awardPage">
-                </div>
-
-                <div class="form-group">
-                    <label for="dateAwarded">Date awarded</label>
-                    <input type="text" class="form-control" id="dateAwarded" name="dateAwarded" placeholder="Month Year... June 2016">
-                </div>
-
-                <div class="form-group">
-                    <label for="comments">Comments</label>
-                    <input type="text" class="form-control" id="comments" name="comments" placeholder="Comments">
-                </div>
-
-                <div class="form-group">
-                    <button id="create-award-button" type="button">Update</button>
-                </div>
-            </form>`;
-
-    $('#tableContent').append(form);//loads what is requested
-
-
-};
-// Awards form End ///////////////
-
-
-
+//ABOUT SECTION START
 // About table Start ///////////////
 export let displayAboutsTable = (about) => {
     let table =
@@ -106,8 +18,8 @@ export let displayAboutsTable = (about) => {
                 <td>${about.title}</td>
                 <td>${about.content}</td>
                 <td>${about.imgName}</td>
-                <td><a href="" id='${about.id}' class='updateAbout'>Update</a>
-                <a href="" id='${about.id}' class='delete'>Delete</a></td>
+                <td><a href="" id='${about.id}' class='update'>Update</a>
+                <a href="" id='${about.id}' class='deleteAbout'>Delete</a></td>
         </tr>`;
         });
 
@@ -193,7 +105,7 @@ export let displayUpdateAboutForm = (about) => {
                 </div>
 
                 <div class="form-group">
-                    <button class="update" data-id="${about.id}" type="button">Update</button>
+                    <button class="updateAbout" data-id="${about.id}" type="button">Update</button>
                 </div>
             </form>`;
 
@@ -202,6 +114,138 @@ export let displayUpdateAboutForm = (about) => {
 
 };
 // UPDATE About form END ///////////////
+//ABOUT SECTION END
+
+//AWARDS SECTION START
+// Awards table Start ///////////////
+//the displayAwardsTable function is what makes the view for awards on the admin page.
+export let displayAwardsTable = (award) => {
+    let table =
+    `<table class='award'>
+        <tr>
+            <th>Award Title</th>
+            <th>Img URL</th>
+            <th>From</th>
+            <th>Award src URL</th>
+            <th>Date Awarded</th>
+            <th>comments</th>
+
+        </tr>`;
+
+        awards.forEach(function(award) {
+        table +=  `<tr>
+                <td>${award.awardTitle}</td>
+                <td>${award.imgName}</td>
+                <td>${award.awardFrom}</td>
+                <td>${award.awardSrcUrl}</td>
+                <td>${award.dateAwarded}</td>
+                <td>${award.comments}</td>
+                <td><a href="" id='${award.id}' class="updateAward" >Update</a>
+                <a href="" id='${award.id}' class='deleteAward' >Delete</a></td>
+        </tr>`;
+        });
+
+        table += `</table>
+        <div id='admin-button'>
+        <button type='button' name='update-button' id='add-award-form' class='addEntry'>Add</button>
+        <div>
+        <a name="form">
+        `;
+
+    $('#tableContent').append(table);//loads what is requested
+
+};
+// Awards table End ///////////////
+// Awards form Start ///////////////
+export let displayNewAwardsForm = () => {
+
+        let form = `
+            <form action="#" method="post" class="">
+
+                <div class="form-group">
+                    <label for="awardTitle">Award title</label>
+                    <input type="text" class="form-control" id="awardTitle" name="awardTitle" placeholder="example: Best Cocktail Bar in the World">
+                </div>
+
+                <div class="form-group">
+                    <label for="imgName">Name of img</label>
+                    <input type="text" class="form-control" id="imgName" name="imgName" placeholder="example: beard-award-logo.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="awardFrom">Award from</label>
+                    <input type="text" class="form-control" id="awardFrom" name="awardFrom" placeholder="example: James Beard Foundation">
+                </div>
+
+                <div class="form-group">
+                    <label for="awardSrcUrl">Url of award page</label>
+                    <input type="url" class="form-control" id="awardSrcUrl" name="awardSrcUrl" placeholder="example: https://www.jamesbeardfoundation.com/awardPage">
+                </div>
+
+                <div class="form-group">
+                    <label for="dateAwarded">Date awarded</label>
+                    <input type="text" class="form-control" id="dateAwarded" name="dateAwarded" placeholder="Month Year... June 2016">
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Comments</label>
+                    <input type="text" class="form-control" id="comments" name="comments" placeholder="Comments">
+                </div>
+
+                <div class="form-group">
+                    <button id="create-award-button" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
+// Awards form End ///////////////
+// Awards update form START
+export let displayUpdateAwardsForm = () => {
+    let form = `
+        <form action="#" method="post">
+
+            <div class="form-group">
+                <label for="awardTitle">Award title</label>
+                <input type="text" class="form-control" id="awardTitle" name="awardTitle" value="${award.awardTitle}">
+            </div>
+
+            <div class="form-group">
+                <label for="imgName">Name of img</label>
+                <input type="text" class="form-control" id="imgName" name="imgName" value="${award.imgName}">
+            </div>
+
+            <div class="form-group">
+                <label for="awardFrom">Award from</label>
+                <input type="text" class="form-control" id="awardFrom" name="awardFrom" value="${award.awardFrom}">
+            </div>
+
+            <div class="form-group">
+                <label for="awardSrcUrl">Url of award page</label>
+                <input type="url" class="form-control" id="awardSrcUrl" name="awardSrcUrl" value="${award.awardSrcUrl}">
+            </div>
+
+            <div class="form-group">
+                <label for="dateAwarded">Date awarded</label>
+                <input type="text" class="form-control" id="dateAwarded" name="dateAwarded" value="${award.dateAwarded}">
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <input type="text" class="form-control" id="comments" name="comments" value="${award.comments}">
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="updateAward" data-id="${award.id}">Update</button>
+            </div>
+        </form>`;
+    $('#tableContent').append(form);//loads what is requested
+};
+// Awards update form END
+
+//AWARDS SECTION END
 
 
 // menu form Start ///////////////

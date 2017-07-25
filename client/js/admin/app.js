@@ -1,5 +1,5 @@
-import { createAward, createAbout, getAboutsById, updateAbout, deleteAbout } from '../admin/model.js';
-import {displayAwardsTable, displayNewAwardsForm, displayAboutsTable, displayMenuForm, displayNewAboutForm, displayUpdateAboutForm } from '../admin/view.js';
+import { createAbout, getAboutsById, updateAbout, deleteAbout, createAward, getAwardsById, updateAward, deleteAward } from '../admin/model.js';
+import {displayNewAboutForm, displayAboutsTable, displayUpdateAboutForm, displayAwardsTable, displayNewAwardsForm, displayUpdateAwardsForm,  displayMenuForm } from '../admin/view.js';
 
 $("[name='page-select']").change(function(event){
 
@@ -135,7 +135,7 @@ $(document).on('click', '#create-about-button', function() {
         }
     });
 });
-//create a new about article End
+//CREATE a new about article End
 
 //UPDATE FORM about article Start
 let createAboutIdInput = (id) => {//this formats the data for the graphql query to use.
@@ -144,7 +144,7 @@ let createAboutIdInput = (id) => {//this formats the data for the graphql query 
     };
 };
 
-$(document).on('click', '.updateAbout', function(e) {
+$(document).on('click', '.update', function(e) {
     e.preventDefault();
     let id = $(this).attr('id'),
         data = createAboutIdInput(id);
@@ -183,9 +183,8 @@ let updateAboutInput = (id,displayOrder, name, title, content, imgName) => {
     };
 };
 
-$(document).on('click', 'button.update', function() {
-    //NOTE these do not match the location on the form!
-    let id = $(".update").data("id"),
+$(document).on('click', 'button.updateAbout', function() {
+    let id = $(".updateAbout").data("id"),
         displayOrder = $('#displayOrder').val(),
         name = $('#name').val(),
         title = $('#title').val(),
@@ -207,7 +206,7 @@ $(document).on('click', 'button.update', function() {
         success: function(response) {
             if (response.hasOwnProperty('data')) {
                 alert('Updated!');
-                $('form')[0].reset();
+                location.reload();
             }
         },
         error: function(xhr, status, response) {
@@ -220,7 +219,7 @@ $(document).on('click', 'button.update', function() {
 //UPDATE about article End
 
 //DELETE About article Start
-$(document).on('click', 'a.delete', function(event){
+$(document).on('click', 'a.deleteAbout', function(event){
     event.preventDefault();
 
     let delConfirm = confirm('Are you sure you want to delete?');
@@ -251,7 +250,7 @@ $(document).on('click', 'a.delete', function(event){
                 },
                 success: function(response) {
                     if (response.hasOwnProperty('data')) {
-                        alert('Deleted!');
+                        alert('Deleted an about section!');
                         location.reload();
                     }
                 },
@@ -275,7 +274,7 @@ $(document).on('click', "#add-award-form", function() {
     displayNewAwardsForm();
 });
 
-//create a new award article Start
+//CREATE a new award article START
     let createAwardInput = (imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
         return {
             "input": {
@@ -323,6 +322,138 @@ $(document).on('click', "#add-award-form", function() {
             }
         });
     });
-//create a new award article End
+//CREATE a new award article END
+
+//UPDATE FORM award article Start
+let createAwardIdInput = (id) => {//this formats the data for the graphql query to use.
+    return {
+            "input": id
+    };
+};
+
+$(document).on('click', 'a.updateAward', function(e) {
+    e.preventDefault();
+    let id = $(this).attr('id'),
+        data = createAwardIdInput(id);
+
+        $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: getAwardsById,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    award = response.data.getAward ;
+
+                    displayUpdateAwardsForm(award);
+                    location.href = "#form";
+
+                }
+        });
+});
+//UPDATE FORM award article End
+
+//UPDATE an award article START
+let updateAwardInput = (id,imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
+    return {
+        "input": {
+            "id": id,
+            "imgName": imgName,
+            "awardTitle": awardTitle,
+            "awardFrom": awardFrom,
+            "awardSrcUrl": awardSrcUrl,
+            "dateAwarded": dateAwarded,
+            "comments": comments
+        }
+    };
+};
+
+$(document).on('click', 'button.updateAward', function() {
+
+    let id = $("button.updateAward").data("id"),
+        imgName = $('#imgName').val(),
+        awardTitle = $('#awardTitle').val(),
+        awardFrom = $('#awardFrom').val(),
+        awardSrcUrl = $('#awardSrcUrl').val(),
+        dateAwarded = $('#dateAwarded').val(),
+        comments = $('#comments').val(),
+        data = updateAwardInput(id, imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments );
+
+        console.log(data);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: updateAward,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('Updated an award!');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//UPDATE a new award article END
+
+//DELETE AWARD article Start
+$(document).on('click', 'a.deleteAward', function(event){
+    event.preventDefault();
+
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
+
+            // Go to db and delete
+            let deleteInput = (id) => {
+                return {
+                    "input": {
+                        "id": id
+                    }
+                };
+            };
+
+            let id = $(this).attr('id'),
+                data = deleteInput(id);
+            console.log(data);
+
+            $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: deleteAward,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + Cookies.get('token')
+                },
+                success: function(response) {
+                    if (response.hasOwnProperty('data')) {
+                        alert('Deleted an award!');
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, response) {
+                    if (response.hasOwnProperty('errors')) {
+                        alert(response.errors[0].message);
+                    }
+                }
+            });
+        }
+});
+//DELETE AWARD article End
 
 // END - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD

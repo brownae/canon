@@ -76,45 +76,60 @@ export const createAward = `
         }
     }`;
 
-    //Delete award
-    export const deleteAward = `
-        mutation deleteAwardQuery($input: DeleteAwardInput!) {
-            deleteAward(input: $input) {
-                changeAward {
-                    id
-                }
-            }
-        }`;
-
-    // Update award
-    export const updateAward = `
-        mutation updateAwardQuery($input: UpdateAwardInput!) {
-            updateAward(input: $input) {
-                changedAward {
-                    id
-                    modifiedAt
-                    imgName
-                    awardTitle
-                    awardFrom
-                    awardSrcUrl
-                    dateAwarded
-                    comments
-                }
-            }
-        }`;
-
-
-
-    // Use this to base your UPDATE menu query
-    export const updateAllMenus = `
-    mutation updateAllmenus($input:UpdateMenuInput!){
-      updateMenu(input:$input){
-        changedMenu{
-            id
-            modifiedAt
-            bottlesUrl
-            foodUrl
-            cocktailsUrl
+//Delete award
+export const deleteAward = `
+    mutation deleteAwardQuery($input: DeleteAwardInput!) {
+      deleteAward(input: $input) {
+         changedAward{
+          id
         }
       }
+    }
+    `;
+
+// Update award
+export const updateAward = `
+    mutation updateAwardQuery($input: UpdateAwardInput!) {
+        updateAward(input: $input) {
+            changedAward {
+                id
+                modifiedAt
+                imgName
+                awardTitle
+                awardFrom
+                awardSrcUrl
+                dateAwarded
+                comments
+            }
+        }
     }`;
+
+//get award with id
+export const getAwardsById = `
+    query getAwardById($input: ID!) {
+      getAward(id: $input) {
+        id
+        modifiedAt
+        imgName
+        awardTitle
+        awardFrom
+        awardSrcUrl
+        dateAwarded
+        comments
+      }
+    }`;
+
+
+// Use this to base your UPDATE menu query
+export const updateAllMenus = `
+mutation updateAllmenus($input:UpdateMenuInput!){
+  updateMenu(input:$input){
+    changedMenu{
+        id
+        modifiedAt
+        bottlesUrl
+        foodUrl
+        cocktailsUrl
+    }
+  }
+}`;

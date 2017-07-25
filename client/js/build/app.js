@@ -17320,104 +17320,53 @@ const createAward = `
         }
     }`;
 
-    //Delete award
-    
+//Delete award
+const deleteAward = `
+    mutation deleteAwardQuery($input: DeleteAwardInput!) {
+      deleteAward(input: $input) {
+         changedAward{
+          id
+        }
+      }
+    }
+    `;
 
-    // Update award
-    
+// Update award
+const updateAward = `
+    mutation updateAwardQuery($input: UpdateAwardInput!) {
+        updateAward(input: $input) {
+            changedAward {
+                id
+                modifiedAt
+                imgName
+                awardTitle
+                awardFrom
+                awardSrcUrl
+                dateAwarded
+                comments
+            }
+        }
+    }`;
 
-
-
-    // Use this to base your UPDATE menu query
-
-// Awards table Start ///////////////
-//the displayAwardsTable function is what makes the view for awards on the admin page.
-let displayAwardsTable = (award) => {
-    let table =
-    `<table class='Award'> <!-- Keep class capitalized -->
-        <tr>
-            <th>Award Title</th>
-            <th>Img URL</th>
-            <th>From</th>
-            <th>Award src URL</th>
-            <th>Date Awarded</th>
-            <th>comments</th>
-
-        </tr>`;
-
-        awards.forEach(function(award) {
-        table +=  `<tr>
-                <td>${award.awardTitle}</td>
-                <td>${award.imgName}</td>
-                <td>${award.awardFrom}</td>
-                <td>${award.awardSrcUrl}</td>
-                <td>${award.dateAwarded}</td>
-                <td>${award.comments}</td>
-                <td><a href="" id='${award.id}' >Update</a>
-                <a href="" id='${award.id}' class='delete' >Delete</a></td>
-        </tr>`;
-        });
-
-        table += `</table>
-        <div id='admin-button'>
-        <button type='button' name='update-button' id='add-award-form' class='addEntry'>Add</button>
-        <div>
-        <a name="form">
-        `;
-
-    $('#tableContent').append(table);//loads what is requested
-
-};
-// Awards table End ///////////////
-// Awards form Start ///////////////
-let displayNewAwardsForm = () => {
-
-        let form = `
-            <form action="#" method="post" class="">
-
-                <div class="form-group">
-                    <label for="awardTitle">Award title</label>
-                    <input type="text" class="form-control" id="awardTitle" name="awardTitle" placeholder="example: Best Cocktail Bar in the World">
-                </div>
-
-                <div class="form-group">
-                    <label for="imgName">Name of img</label>
-                    <input type="text" class="form-control" id="imgName" name="imgName" placeholder="example: beard-award-logo.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="awardFrom">Award from</label>
-                    <input type="text" class="form-control" id="awardFrom" name="awardFrom" placeholder="example: James Beard Foundation">
-                </div>
-
-                <div class="form-group">
-                    <label for="awardSrcUrl">Url of award page</label>
-                    <input type="url" class="form-control" id="awardSrcUrl" name="awardSrcUrl" placeholder="example: https://www.jamesbeardfoundation.com/awardPage">
-                </div>
-
-                <div class="form-group">
-                    <label for="dateAwarded">Date awarded</label>
-                    <input type="text" class="form-control" id="dateAwarded" name="dateAwarded" placeholder="Month Year... June 2016">
-                </div>
-
-                <div class="form-group">
-                    <label for="comments">Comments</label>
-                    <input type="text" class="form-control" id="comments" name="comments" placeholder="Comments">
-                </div>
-
-                <div class="form-group">
-                    <button id="create-award-button" type="button">Update</button>
-                </div>
-            </form>`;
-
-    $('#tableContent').append(form);//loads what is requested
+//get award with id
+const getAwardsById = `
+    query getAwardById($input: ID!) {
+      getAward(id: $input) {
+        id
+        modifiedAt
+        imgName
+        awardTitle
+        awardFrom
+        awardSrcUrl
+        dateAwarded
+        comments
+      }
+    }`;
 
 
-};
-// Awards form End ///////////////
+// Use this to base your UPDATE menu query
 
-
-
+//ABOUT SECTION START
 // About table Start ///////////////
 let displayAboutsTable = (about) => {
     let table =
@@ -17437,8 +17386,8 @@ let displayAboutsTable = (about) => {
                 <td>${about.title}</td>
                 <td>${about.content}</td>
                 <td>${about.imgName}</td>
-                <td><a href="" id='${about.id}' class='updateAbout'>Update</a>
-                <a href="" id='${about.id}' class='delete'>Delete</a></td>
+                <td><a href="" id='${about.id}' class='update'>Update</a>
+                <a href="" id='${about.id}' class='deleteAbout'>Delete</a></td>
         </tr>`;
         });
 
@@ -17524,7 +17473,7 @@ let displayUpdateAboutForm = (about) => {
                 </div>
 
                 <div class="form-group">
-                    <button class="update" data-id="${about.id}" type="button">Update</button>
+                    <button class="updateAbout" data-id="${about.id}" type="button">Update</button>
                 </div>
             </form>`;
 
@@ -17533,6 +17482,138 @@ let displayUpdateAboutForm = (about) => {
 
 };
 // UPDATE About form END ///////////////
+//ABOUT SECTION END
+
+//AWARDS SECTION START
+// Awards table Start ///////////////
+//the displayAwardsTable function is what makes the view for awards on the admin page.
+let displayAwardsTable = (award) => {
+    let table =
+    `<table class='award'>
+        <tr>
+            <th>Award Title</th>
+            <th>Img URL</th>
+            <th>From</th>
+            <th>Award src URL</th>
+            <th>Date Awarded</th>
+            <th>comments</th>
+
+        </tr>`;
+
+        awards.forEach(function(award) {
+        table +=  `<tr>
+                <td>${award.awardTitle}</td>
+                <td>${award.imgName}</td>
+                <td>${award.awardFrom}</td>
+                <td>${award.awardSrcUrl}</td>
+                <td>${award.dateAwarded}</td>
+                <td>${award.comments}</td>
+                <td><a href="" id='${award.id}' class="updateAward" >Update</a>
+                <a href="" id='${award.id}' class='deleteAward' >Delete</a></td>
+        </tr>`;
+        });
+
+        table += `</table>
+        <div id='admin-button'>
+        <button type='button' name='update-button' id='add-award-form' class='addEntry'>Add</button>
+        <div>
+        <a name="form">
+        `;
+
+    $('#tableContent').append(table);//loads what is requested
+
+};
+// Awards table End ///////////////
+// Awards form Start ///////////////
+let displayNewAwardsForm = () => {
+
+        let form = `
+            <form action="#" method="post" class="">
+
+                <div class="form-group">
+                    <label for="awardTitle">Award title</label>
+                    <input type="text" class="form-control" id="awardTitle" name="awardTitle" placeholder="example: Best Cocktail Bar in the World">
+                </div>
+
+                <div class="form-group">
+                    <label for="imgName">Name of img</label>
+                    <input type="text" class="form-control" id="imgName" name="imgName" placeholder="example: beard-award-logo.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="awardFrom">Award from</label>
+                    <input type="text" class="form-control" id="awardFrom" name="awardFrom" placeholder="example: James Beard Foundation">
+                </div>
+
+                <div class="form-group">
+                    <label for="awardSrcUrl">Url of award page</label>
+                    <input type="url" class="form-control" id="awardSrcUrl" name="awardSrcUrl" placeholder="example: https://www.jamesbeardfoundation.com/awardPage">
+                </div>
+
+                <div class="form-group">
+                    <label for="dateAwarded">Date awarded</label>
+                    <input type="text" class="form-control" id="dateAwarded" name="dateAwarded" placeholder="Month Year... June 2016">
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Comments</label>
+                    <input type="text" class="form-control" id="comments" name="comments" placeholder="Comments">
+                </div>
+
+                <div class="form-group">
+                    <button id="create-award-button" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
+// Awards form End ///////////////
+// Awards update form START
+let displayUpdateAwardsForm = () => {
+    let form = `
+        <form action="#" method="post">
+
+            <div class="form-group">
+                <label for="awardTitle">Award title</label>
+                <input type="text" class="form-control" id="awardTitle" name="awardTitle" value="${award.awardTitle}">
+            </div>
+
+            <div class="form-group">
+                <label for="imgName">Name of img</label>
+                <input type="text" class="form-control" id="imgName" name="imgName" value="${award.imgName}">
+            </div>
+
+            <div class="form-group">
+                <label for="awardFrom">Award from</label>
+                <input type="text" class="form-control" id="awardFrom" name="awardFrom" value="${award.awardFrom}">
+            </div>
+
+            <div class="form-group">
+                <label for="awardSrcUrl">Url of award page</label>
+                <input type="url" class="form-control" id="awardSrcUrl" name="awardSrcUrl" value="${award.awardSrcUrl}">
+            </div>
+
+            <div class="form-group">
+                <label for="dateAwarded">Date awarded</label>
+                <input type="text" class="form-control" id="dateAwarded" name="dateAwarded" value="${award.dateAwarded}">
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <input type="text" class="form-control" id="comments" name="comments" value="${award.comments}">
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="updateAward" data-id="${award.id}">Update</button>
+            </div>
+        </form>`;
+    $('#tableContent').append(form);//loads what is requested
+};
+// Awards update form END
+
+//AWARDS SECTION END
 
 
 // menu form Start ///////////////
@@ -17962,7 +18043,7 @@ $(document).on('click', '#create-about-button', function() {
         }
     });
 });
-//create a new about article End
+//CREATE a new about article End
 
 //UPDATE FORM about article Start
 let createAboutIdInput = (id) => {//this formats the data for the graphql query to use.
@@ -17971,7 +18052,7 @@ let createAboutIdInput = (id) => {//this formats the data for the graphql query 
     };
 };
 
-$(document).on('click', '.updateAbout', function(e) {
+$(document).on('click', '.update', function(e) {
     e.preventDefault();
     let id = $(this).attr('id'),
         data = createAboutIdInput(id);
@@ -18010,9 +18091,8 @@ let updateAboutInput = (id,displayOrder, name, title, content, imgName) => {
     };
 };
 
-$(document).on('click', 'button.update', function() {
-    //NOTE these do not match the location on the form!
-    let id = $(".update").data("id"),
+$(document).on('click', 'button.updateAbout', function() {
+    let id = $(".updateAbout").data("id"),
         displayOrder = $('#displayOrder').val(),
         name = $('#name').val(),
         title = $('#title').val(),
@@ -18034,7 +18114,7 @@ $(document).on('click', 'button.update', function() {
         success: function(response) {
             if (response.hasOwnProperty('data')) {
                 alert('Updated!');
-                $('form')[0].reset();
+                location.reload();
             }
         },
         error: function(xhr, status, response) {
@@ -18047,7 +18127,7 @@ $(document).on('click', 'button.update', function() {
 //UPDATE about article End
 
 //DELETE About article Start
-$(document).on('click', 'a.delete', function(event){
+$(document).on('click', 'a.deleteAbout', function(event){
     event.preventDefault();
 
     let delConfirm = confirm('Are you sure you want to delete?');
@@ -18078,7 +18158,7 @@ $(document).on('click', 'a.delete', function(event){
                 },
                 success: function(response) {
                     if (response.hasOwnProperty('data')) {
-                        alert('Deleted!');
+                        alert('Deleted an about section!');
                         location.reload();
                     }
                 },
@@ -18102,7 +18182,7 @@ $(document).on('click', "#add-award-form", function() {
     displayNewAwardsForm();
 });
 
-//create a new award article Start
+//CREATE a new award article START
     let createAwardInput = (imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
         return {
             "input": {
@@ -18150,7 +18230,139 @@ $(document).on('click', "#add-award-form", function() {
             }
         });
     });
-//create a new award article End
+//CREATE a new award article END
+
+//UPDATE FORM award article Start
+let createAwardIdInput = (id) => {//this formats the data for the graphql query to use.
+    return {
+            "input": id
+    };
+};
+
+$(document).on('click', 'a.updateAward', function(e) {
+    e.preventDefault();
+    let id = $(this).attr('id'),
+        data = createAwardIdInput(id);
+
+        $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: getAwardsById,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    award = response.data.getAward ;
+
+                    displayUpdateAwardsForm(award);
+                    location.href = "#form";
+
+                }
+        });
+});
+//UPDATE FORM award article End
+
+//UPDATE an award article START
+let updateAwardInput = (id,imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
+    return {
+        "input": {
+            "id": id,
+            "imgName": imgName,
+            "awardTitle": awardTitle,
+            "awardFrom": awardFrom,
+            "awardSrcUrl": awardSrcUrl,
+            "dateAwarded": dateAwarded,
+            "comments": comments
+        }
+    };
+};
+
+$(document).on('click', 'button.updateAward', function() {
+
+    let id = $("button.updateAward").data("id"),
+        imgName = $('#imgName').val(),
+        awardTitle = $('#awardTitle').val(),
+        awardFrom = $('#awardFrom').val(),
+        awardSrcUrl = $('#awardSrcUrl').val(),
+        dateAwarded = $('#dateAwarded').val(),
+        comments = $('#comments').val(),
+        data = updateAwardInput(id, imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments );
+
+        console.log(data);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: updateAward,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('Updated an award!');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//UPDATE a new award article END
+
+//DELETE AWARD article Start
+$(document).on('click', 'a.deleteAward', function(event){
+    event.preventDefault();
+
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
+
+            // Go to db and delete
+            let deleteInput = (id) => {
+                return {
+                    "input": {
+                        "id": id
+                    }
+                };
+            };
+
+            let id = $(this).attr('id'),
+                data = deleteInput(id);
+            console.log(data);
+
+            $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: deleteAward,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + Cookies.get('token')
+                },
+                success: function(response) {
+                    if (response.hasOwnProperty('data')) {
+                        alert('Deleted an award!');
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, response) {
+                    if (response.hasOwnProperty('errors')) {
+                        alert(response.errors[0].message);
+                    }
+                }
+            });
+        }
+});
+//DELETE AWARD article End
 
 // END - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD
 
