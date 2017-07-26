@@ -32,7 +32,7 @@
                                 <a href="awards.php">Awards</a>
                             </li>
                             <li>
-                                <a href="#!">Book</a>
+                                <a href="products.php">Shop</a>
                             </li>
                             <li>
                                 <a href="#!">FAQ</a>

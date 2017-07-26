@@ -12,7 +12,7 @@
                         <!-- ajax query will populate here -->
                     </ul>
                 <li><a href="awards.php">Awards</a></li>
-                <li><a href="#">Book</a></li>
+                <li><a href="products.php">Shop</a></li>
                 <li><a href="about.php">About</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">FAQ</a></li>

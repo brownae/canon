@@ -83,14 +83,10 @@ article
     @include desktop
         flex-direction: row
 
-    h3 span, h4 span
+    h3 span, h4 span, p span
         font-family: $serifFont
         font-weight: 700
         font-size: 1.2em
-
-    .img-award
-        @extend .img-about
-        width: 50%
 
     .img-about
         width: 80%
@@ -102,6 +98,13 @@ article
             width: 30%
             margin-right: 20px
 
+    .img-award
+        @extend .img-about
+        width: 50%
+
+    .img-product
+        @extend .img-about
+        width: 50%
 
     .content-award
         width: 100%
@@ -118,6 +121,11 @@ article
             width: 70%
         @include desktop
             width: 70%
+
+    .content-product
+        @extend .content-about
+
+
 
 main#awardsPage
     display: flex

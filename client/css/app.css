@@ -442,23 +442,25 @@ article, form, table {
   @media (min-width: 1200px) {
     article, form, table {
       flex-direction: row; } }
-  article h3 span, form h3 span, table h3 span, article h4 span, form h4 span, table h4 span {
+  article h3 span, form h3 span, table h3 span, article h4 span, form h4 span, table h4 span, article p span, form p span, table p span {
     font-family: "Inconsolata", monospace;
     font-weight: 700;
     font-size: 1.2em; }
-  article .img-award, form .img-award, table .img-award {
-    width: 50%; }
-  article .img-about, form .img-about, table .img-about, article .img-award, form .img-award, table .img-award {
+  article .img-about, form .img-about, table .img-about, article .img-award, form .img-award, table .img-award, article .img-product, form .img-product, table .img-product {
     width: 80%;
     margin: 15px auto; }
     @media (min-width: 680px) and (max-width: 1199px) {
-      article .img-about, form .img-about, table .img-about, article .img-award, form .img-award, table .img-award {
+      article .img-about, form .img-about, table .img-about, article .img-award, form .img-award, table .img-award, article .img-product, form .img-product, table .img-product {
         width: 30%;
         margin-right: 20px; } }
     @media (min-width: 1200px) {
-      article .img-about, form .img-about, table .img-about, article .img-award, form .img-award, table .img-award {
+      article .img-about, form .img-about, table .img-about, article .img-award, form .img-award, table .img-award, article .img-product, form .img-product, table .img-product {
         width: 30%;
         margin-right: 20px; } }
+  article .img-award, form .img-award, table .img-award {
+    width: 50%; }
+  article .img-product, form .img-product, table .img-product {
+    width: 50%; }
   article .content-award, form .content-award, table .content-award {
     width: 100%;
     margin: auto 0; }
@@ -468,14 +470,14 @@ article, form, table {
     @media (min-width: 1200px) {
       article .content-award, form .content-award, table .content-award {
         width: 70%; } }
-  article .content-about, form .content-about, table .content-about {
+  article .content-about, form .content-about, table .content-about, article .content-product, form .content-product, table .content-product {
     width: 100%;
     margin: auto 0; }
     @media (min-width: 680px) and (max-width: 1199px) {
-      article .content-about, form .content-about, table .content-about {
+      article .content-about, form .content-about, table .content-about, article .content-product, form .content-product, table .content-product {
         width: 70%; } }
     @media (min-width: 1200px) {
-      article .content-about, form .content-about, table .content-about {
+      article .content-about, form .content-about, table .content-about, article .content-product, form .content-product, table .content-product {
         width: 70%; } }
 
 main#awardsPage {
