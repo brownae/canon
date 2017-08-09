@@ -23,6 +23,7 @@ body
     font-family: $typewriter
     line-height: 1.2em
     width: 100%
+    font-size: $default-font-size
 
 div#wrapper
     //max-width: 1200px
@@ -83,10 +84,22 @@ article
     @include desktop
         flex-direction: row
 
+    div
+        a
+            color: $blue
+            &:hover
+                color: $navyBlue
+
     h3 span, h4 span, p span
         font-family: $serifFont
         font-weight: 700
-        font-size: 1.2em
+        font-size: 1.8em
+
+    h4 span
+        font-size: $default-font-size
+
+    p span
+        font-size: $default-font-size
 
     .img-about
         width: 80%
