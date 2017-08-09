@@ -17228,8 +17228,8 @@ abouts.forEach(function(about) {
                 <img src="img/${about.imgName}" alt="Jaime boudreau Canon owner">
             </div>
             <div class="content-about">
-                <h3>Name: ${about.name}</h3>
-                <h4>Title: ${about.title}</h4>
+                <h3><span>${about.name}</span></h3>
+                <h4><span>${about.title}</span></h4>
 
                 <p>${about.content}</p>
             </div>
@@ -17890,6 +17890,64 @@ let displayMenus = (menus) => {
 
 };
 
+//this is where I query the db and get the info and put it in a var
+
+// All awards
+const getAllProducts = `
+    query getAllProducts {
+        viewer {
+            allProducts {
+                edges {
+                    node {
+                        id
+                        modifiedAt
+                        createdAt
+                        productName
+                        productType
+                        productSpecs
+                        productDescription
+                        productPrice
+                        productForPurchaseAt
+                        productForPurchaseAtURL
+                        productInStock
+                        productImg
+                    }
+                }
+            }
+        }
+    }`;
+
+// this is the page where I say get element by id and put $thisVar in that spot.
+
+
+
+let displayProducts = (products) => {
+    products.forEach(function(product) {
+        console.log(product);
+
+        const productTemplate = `
+            <article>
+                <div class="img-product">
+                    <img src="img/${product.productImg}" alt="${product.productName}">
+                </div>
+                <div class="content-product">
+                    <h3><span>${product.productName}</span></h3>
+                    <h4><span>${product.productSpecs}</span></h4>
+
+                    <p><span></span> ${product.productDescription}</p>
+
+                    <p><span>Available at: </span><a href="${product.productForPurchaseAtURL}"> ${product.productForPurchaseAt}</a></p>
+                    <p><span>Price $${product.productPrice},  Availability: ${product.productInStock}</span>
+
+                </div>
+            </article>
+        `;
+
+        $('#productsPage').append(productTemplate);
+    });
+
+};
+
 $.ajax({
         type: "POST",
         url: "https://us-west-2.api.scaphold.io/graphql/canon",
@@ -18420,5 +18478,25 @@ $.ajax({
                 }
             }
             displayMenus(menus);
+        }
+});
+
+$.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: getAllProducts
+        }),
+        contentType: 'application/json',
+        success: function(response) {
+            products = [];
+            if (response.hasOwnProperty('data')) {
+                let productEdges = response.data.viewer.allProducts.edges;
+                for (var product of productEdges) {
+                    products.push(product.node);
+                }
+            }
+            console.log(products);
+            displayProducts(products);
         }
 });

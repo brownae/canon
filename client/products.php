@@ -7,9 +7,9 @@
     </div>
 </header>
     <h2>Things we made...</h2>
-<main id="productPage">
+<main id="productsPage">
 
-    <article>
+    <!-- <article>
         <div class="img-product">
             <img src="img/canon-book.jpg" alt="The Canon Cocktail Book">
         </div>
@@ -39,7 +39,7 @@
 
 
         </div>
-    </article>
+    </article> -->
 
 </main>
 <?php include('includes/footer.php');?>

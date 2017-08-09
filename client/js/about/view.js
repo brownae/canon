@@ -11,8 +11,8 @@ abouts.forEach(function(about) {
                 <img src="img/${about.imgName}" alt="Jaime boudreau Canon owner">
             </div>
             <div class="content-about">
-                <h3>Name: ${about.name}</h3>
-                <h4>Title: ${about.title}</h4>
+                <h3><span>${about.name}</span></h3>
+                <h4><span>${about.title}</span></h4>
 
                 <p>${about.content}</p>
             </div>
