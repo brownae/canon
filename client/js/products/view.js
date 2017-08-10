@@ -4,7 +4,6 @@
 
 export let displayProducts = (products) => {
     products.forEach(function(product) {
-        console.log(product);
 
         const productTemplate = `
             <article>
@@ -18,7 +17,8 @@ export let displayProducts = (products) => {
                     <p><span></span> ${product.productDescription}</p>
 
                     <p><span>Available at: </span><a href="${product.productForPurchaseAtURL}"> ${product.productForPurchaseAt}</a></p>
-                    <p><span>Price $${product.productPrice},  Availability: ${product.productInStock}</span>
+                    <p><span>Price $${product.productPrice}</span></p>
+                    <p><span>Availability: ${product.productInStock}</span></p>
 
                 </div>
             </article>

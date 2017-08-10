@@ -35,7 +35,7 @@
                                 <a href="products.php">Shop</a>
                             </li>
                             <li>
-                                <a href="#!">FAQ</a>
+                                <a href="faq.php">FAQ</a>
                             </li>
                             <li>
                                 <a href="about.php">About</a>

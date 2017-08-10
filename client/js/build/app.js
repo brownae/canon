@@ -17687,7 +17687,7 @@ let displayAwards = (awards) => {
                     </a>
                 </div>
                 <div class="content-award">
-                    <h3><span>Award: </span>${award.awardTitle}</h3>
+                    <h3><span>${award.awardTitle} </span></h3>
                     <h4><span>From: </span>${award.awardFrom}</h4>
                     <h4><span>Date: </span>${award.dateAwarded}</h4>
                     <p>${award.comments}</p>
@@ -17698,7 +17698,46 @@ let displayAwards = (awards) => {
 
         $('#awardsPage').append(awardTemplate);
     });
-    
+
+};
+
+//this is where I query the db and get the info and put it in a var
+
+// All awards
+const getAllFaqs = `
+    query getAllFaqs {
+        viewer {
+            allFaqs {
+                edges {
+                    node {
+                        id
+                        modifiedAt
+                        createdAt
+                        question
+                        answer
+                        displayOrder
+                    }
+                }
+            }
+        }
+    }`;
+
+// this is the page where I say get element by id and put $thisVar in that spot.
+
+
+
+let displayFaqs = (faqs) => {
+    faqs.forEach(function(faq) {
+        //console.log(faq);
+
+        const faqTemplate = `
+            <p class="question"> Do I have to have a reservation?</p>
+            <p class="answer">No, we accept walk-ins but if you want a guaranteed spot you should make a reservation</p>
+        `;
+
+        $('.content-faq').append(faqTemplate);
+    });
+
 };
 
 $(function() { // DOM Ready
@@ -17923,7 +17962,6 @@ const getAllProducts = `
 
 let displayProducts = (products) => {
     products.forEach(function(product) {
-        console.log(product);
 
         const productTemplate = `
             <article>
@@ -17937,7 +17975,8 @@ let displayProducts = (products) => {
                     <p><span></span> ${product.productDescription}</p>
 
                     <p><span>Available at: </span><a href="${product.productForPurchaseAtURL}"> ${product.productForPurchaseAt}</a></p>
-                    <p><span>Price $${product.productPrice},  Availability: ${product.productInStock}</span>
+                    <p><span>Price $${product.productPrice}</span></p>
+                    <p><span>Availability: ${product.productInStock}</span></p>
 
                 </div>
             </article>
@@ -18444,6 +18483,26 @@ $.ajax({
         }
 });
 
+$.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: getAllFaqs
+        }),
+        contentType: 'application/json',
+        success: function(response) {
+            faqs = [];
+            if (response.hasOwnProperty('data')) {
+                let faqEdges = response.data.viewer.allFaqs.edges;
+                for (var faq of faqEdges) {
+                    faqs.push(faq.node);
+                }
+            }
+            console.log(faqs);
+            displayFaqs(faqs);
+        }
+});
+
 $(function() { //ready on load
 
     if (location.pathname.substring(location.pathname.lastIndexOf("/") + 1) != "admin.php"){
@@ -18496,7 +18555,6 @@ $.ajax({
                     products.push(product.node);
                 }
             }
-            console.log(products);
             displayProducts(products);
         }
 });

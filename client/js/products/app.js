@@ -17,7 +17,6 @@ $.ajax({
                     products.push(product.node);
                 }
             }
-            console.log(products);
             displayProducts(products);
         }
 });

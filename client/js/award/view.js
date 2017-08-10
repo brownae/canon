@@ -14,7 +14,7 @@ export let displayAwards = (awards) => {
                     </a>
                 </div>
                 <div class="content-award">
-                    <h3><span>Award: </span>${award.awardTitle}</h3>
+                    <h3><span>${award.awardTitle} </span></h3>
                     <h4><span>From: </span>${award.awardFrom}</h4>
                     <h4><span>Date: </span>${award.dateAwarded}</h4>
                     <p>${award.comments}</p>
@@ -25,5 +25,5 @@ export let displayAwards = (awards) => {
 
         $('#awardsPage').append(awardTemplate);
     });
-    
+
 };
