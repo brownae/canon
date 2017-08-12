@@ -1,6 +1,6 @@
 // queries for the admin section are currently being pulled in from the model of their section
 
-//make this create about
+//CREATE about
 export const createAbout = `
     mutation createAboutQuery($input: CreateAboutInput!) {
         createAbout(input: $input) {
@@ -117,6 +117,61 @@ export const getAwardsById = `
         dateAwarded
         comments
       }
+    }`;
+
+
+    //CREATE faq
+    export const createFaq = `
+        mutation createFaqQuery($input: CreateFaqInput!) {
+            createFaq(input: $input) {
+                changedFaq {
+                    id
+                    modifiedAt
+                    createdAt
+                    displayOrder
+                    question
+                    answer
+                }
+            }
+        }`;
+
+    //Delete faq
+    export const deleteFaq = `
+    mutation deleteFaqQuery($input: DeleteFaqInput!) {
+      deleteFaq(input: $input) {
+        changedFaq {
+          id
+        }
+      }
+    }
+    `;
+    //Update faq
+    export const updateFaq = `
+        mutation updateFaqQuery($input: UpdateFaqInput!) {
+            updateFaq(input: $input) {
+                changedFaq {
+                    id
+                    modifiedAt
+                    createdAt
+                    displayOrder
+                    question
+                    answer
+                }
+            }
+        }
+    `;
+
+    //get faq with id
+    export const getFaqById = `
+    query getFaqsById($input: ID!) {
+        getFaq(id: $input) {
+            id
+            modifiedAt
+            createdAt
+            displayOrder
+            question
+            answer
+        }
     }`;
 
 

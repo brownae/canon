@@ -17244,7 +17244,7 @@ abouts.forEach(function(about) {
 
 // queries for the admin section are currently being pulled in from the model of their section
 
-//make this create about
+//CREATE about
 const createAbout = `
     mutation createAboutQuery($input: CreateAboutInput!) {
         createAbout(input: $input) {
@@ -17361,6 +17361,61 @@ const getAwardsById = `
         dateAwarded
         comments
       }
+    }`;
+
+
+    //CREATE faq
+    const createFaq = `
+        mutation createFaqQuery($input: CreateFaqInput!) {
+            createFaq(input: $input) {
+                changedFaq {
+                    id
+                    modifiedAt
+                    createdAt
+                    displayOrder
+                    question
+                    answer
+                }
+            }
+        }`;
+
+    //Delete faq
+    const deleteFaq = `
+    mutation deleteFaqQuery($input: DeleteFaqInput!) {
+      deleteFaq(input: $input) {
+        changedFaq {
+          id
+        }
+      }
+    }
+    `;
+    //Update faq
+    const updateFaq = `
+        mutation updateFaqQuery($input: UpdateFaqInput!) {
+            updateFaq(input: $input) {
+                changedFaq {
+                    id
+                    modifiedAt
+                    createdAt
+                    displayOrder
+                    question
+                    answer
+                }
+            }
+        }
+    `;
+
+    //get faq with id
+    const getFaqById = `
+    query getFaqsById($input: ID!) {
+        getFaq(id: $input) {
+            id
+            modifiedAt
+            createdAt
+            displayOrder
+            question
+            answer
+        }
     }`;
 
 
@@ -17615,6 +17670,97 @@ let displayUpdateAwardsForm = () => {
 
 //AWARDS SECTION END
 
+//FAQ SECTION START
+// FAQ table Start ///////////////
+let displayFaqTable = (faq) => {
+    let table =
+    `<table class='faq'><!-- Keep class capitalized -->
+        <tr>
+            <th>Display Order</th>
+            <th>Question</th>
+            <th>Answer</th>
+        </tr>`;
+
+        faqs.forEach(function(faq) {
+        table +=  `<tr>
+                <td>${faq.displayOrder}</td>
+                <td>${faq.question}</td>
+                <td>${faq.answer}</td>
+                <td><a href="" id='${faq.id}' class='update'>Update</a>
+                <a href="" id='${faq.id}' class='deleteFaq'>Delete</a></td>
+        </tr>`;
+        });
+
+        table += `</table>
+        <div id='admin-button'>
+        <button type="button" name="add-faq-form" id="add-faq-form" class='addEntry' >Add</button>
+        <div>
+        <a name="form">
+        `;
+
+    $('#tableContent').append(table);//loads what is requested
+
+};
+// FAQ table End ///////////////
+// FAQ form Start ///////////////
+let displayNewFaqForm = () => {
+
+        let form = `
+            <form action="#" method="post" class="">
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" placeholder="(Number)">
+                </div>
+
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <input type="text" class="form-control" id="question" name="question" placeholder="Do you ? ... ">
+                </div>
+
+                <div class="form-group">
+                    <label for="answer">Answer</label>
+                    <input type="text" class="form-control" id="answer" name="answer" placeholder="Yes we ...">
+                </div>
+
+                <div class="form-group">
+                    <button id="create-faq-button" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+};
+// NEW FAQ form END ///////////////
+let displayUpdateFaqForm = (faq) => {
+
+        let form = `
+            <form action="#" method="post" class="">
+            <h2>Update:${faq.question}<h2>
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" value="${faq.displayOrder}">
+                </div>
+
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <input type="text" class="form-control" id="question" name="question" value="${faq.question}">
+                </div>
+
+                <div class="form-group">
+                    <label for="answer">Answer</label>
+                    <input type="text" class="form-control" id="answer" name="answer" value="${faq.answer}">
+                </div>
+
+                <div class="form-group">
+                    <button class="updateFaq" data-id="${faq.id}" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
+// UPDATE FAQ form END ///////////////
+//FAQ SECTION END
 
 // menu form Start ///////////////
 let displayMenuForm = (menu) => {
@@ -18055,6 +18201,29 @@ $("[name='page-select']").change(function(event){
                     }
             });
             break;
+        case 'faqs':
+            $('#tableContent').empty();//clears what was in div before
+
+            $.ajax({
+                    type: "POST",
+                    url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                    data: JSON.stringify({
+                        query: getAllFaqs
+                    }),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        faqs = [];
+                        if (response.hasOwnProperty('data')) {
+                            let faqEdges = response.data.viewer.allFaqs.edges;
+                            for (var faq of faqEdges) {
+                                faqs.push(faq.node);
+                            }
+                        }
+                        // console.log(faqs);
+                        displayFaqTable(faqs);
+                    }
+            });
+            break;
         case 'menu':
             $('#tableContent').empty();//clears what was in div before
 
@@ -18463,6 +18632,182 @@ $(document).on('click', 'a.deleteAward', function(event){
 
 // END - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD
 
+// START - FAQ *** FAQ *** FAQ *** FAQ *** FAQ *** FAQ
+
+// this pops down the form to add a new FAQ article
+$(document).on('click', "#add-faq-form", function() {
+    displayNewFaqForm();
+});
+
+//CREATE a new FAQ article Start
+let createFaqInput = (displayOrder, question, answer) => {
+    return {
+        "input": {
+            "displayOrder": displayOrder,
+            "question": question,
+            "answer": answer
+        }
+    };
+};
+
+$(document).on('click', '#create-faq-button', function() {
+
+    let displayOrder = $('#displayOrder').val(),
+        question = $('#question').val(),
+        answer = $('#answer').val(),
+        data = createFaqInput(displayOrder, question, answer);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: createFaq,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('You created a new Faq!');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//CREATE a new FAQ article End
+
+//UPDATE FORM FAQ article Start
+let createFaqIdInput = (id) => {//this formats the data for the graphql query to use.
+    return {
+            "input": id
+    };
+};
+
+$(document).on('click', '.update', function(e) {
+    e.preventDefault();
+    let id = $(this).attr('id'),
+        data = createFaqIdInput(id);
+
+        $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: getFaqById,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    //console.log(response);
+                    faqs = response.data.getFaq ;
+
+                    displayUpdateFaqForm(faqs);
+                    location.href = "#form";
+
+                }
+        });
+});
+//UPDATE FORM FAQ article End
+
+//UPDATE FAQ article Start
+let updateFaqInput = (id,displayOrder, question, answer) => {
+    return {
+        "input": {
+            "id": id,
+            "displayOrder": displayOrder,
+            "question": question,
+            "answer": answer
+        }
+    };
+};
+
+$(document).on('click', 'button.updateFaq', function() {
+    let id = $(".updateFaq").data("id"),
+        displayOrder = $('#displayOrder').val(),
+        question = $('#question').val(),
+        answer = $('#answer').val(),
+        data = updateFaqInput(id,displayOrder, question, answer);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: updateFaq,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('Updated!');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//UPDATE FAQ article End
+
+//DELETE FAQ article Start
+$(document).on('click', 'a.deleteFaq', function(event){
+    event.preventDefault();
+
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
+
+            // Go to db and delete
+            let deleteInput = (id) => {
+                return {
+                    "input": {
+                        "id": id
+                    }
+                };
+            };
+
+            let id = $(this).attr('id'),
+                data = deleteInput(id);
+
+            $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: deleteFaq,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + Cookies.get('token')
+                },
+                success: function(response) {
+                    if (response.hasOwnProperty('data')) {
+                        alert('Deleted an FAQ!');
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, response) {
+                    if (response.hasOwnProperty('errors')) {
+                        alert(response.errors[0].message);
+                    }
+                }
+            });
+        }
+});
+//DELETE FAQ article End
+
+// END - FAQ *** FAQ *** FAQ *** FAQ *** FAQ *** FAQ
+
 $.ajax({
         type: "POST",
         url: "https://us-west-2.api.scaphold.io/graphql/canon",
@@ -18498,7 +18843,7 @@ $.ajax({
                     faqs.push(faq.node);
                 }
             }
-            console.log(faqs);
+            // console.log(faqs);
             displayFaqs(faqs);
         }
 });

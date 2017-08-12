@@ -17,7 +17,7 @@ $.ajax({
                     faqs.push(faq.node);
                 }
             }
-            console.log(faqs);
+            // console.log(faqs);
             displayFaqs(faqs);
         }
 });

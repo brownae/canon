@@ -21,8 +21,8 @@ $.ajax({
         }
 });
 
-import { createAbout, getAboutsById, updateAbout, deleteAbout, createAward, getAwardsById, updateAward, deleteAward } from '../admin/model.js';
-import {displayNewAboutForm, displayAboutsTable, displayUpdateAboutForm, displayAwardsTable, displayNewAwardsForm, displayUpdateAwardsForm,  displayMenuForm } from '../admin/view.js';
+import { createAbout, getAboutsById, updateAbout, deleteAbout, createAward, getAwardsById, updateAward, deleteAward,createFaq, getFaqById, updateFaq, deleteFaq, updateAllMenus } from '../admin/model.js';
+import {displayNewAboutForm, displayAboutsTable, displayUpdateAboutForm, displayAwardsTable, displayNewAwardsForm, displayUpdateAwardsForm,displayFaqTable, displayNewFaqForm, displayUpdateFaqForm, displayMenuForm } from '../admin/view.js';
 
 $("[name='page-select']").change(function(event){
 
@@ -70,6 +70,29 @@ $("[name='page-select']").change(function(event){
                         }
                         //console.log(awards);
                         displayAwardsTable(awards);
+                    }
+            });
+            break;
+        case 'faqs':
+            $('#tableContent').empty();//clears what was in div before
+
+            $.ajax({
+                    type: "POST",
+                    url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                    data: JSON.stringify({
+                        query: getAllFaqs
+                    }),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        faqs = [];
+                        if (response.hasOwnProperty('data')) {
+                            let faqEdges = response.data.viewer.allFaqs.edges;
+                            for (var faq of faqEdges) {
+                                faqs.push(faq.node);
+                            }
+                        }
+                        // console.log(faqs);
+                        displayFaqTable(faqs);
                     }
             });
             break;
@@ -481,6 +504,182 @@ $(document).on('click', 'a.deleteAward', function(event){
 
 // END - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD
 
+// START - FAQ *** FAQ *** FAQ *** FAQ *** FAQ *** FAQ
+
+// this pops down the form to add a new FAQ article
+$(document).on('click', "#add-faq-form", function() {
+    displayNewFaqForm();
+});
+
+//CREATE a new FAQ article Start
+let createFaqInput = (displayOrder, question, answer) => {
+    return {
+        "input": {
+            "displayOrder": displayOrder,
+            "question": question,
+            "answer": answer
+        }
+    };
+};
+
+$(document).on('click', '#create-faq-button', function() {
+
+    let displayOrder = $('#displayOrder').val(),
+        question = $('#question').val(),
+        answer = $('#answer').val(),
+        data = createFaqInput(displayOrder, question, answer);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: createFaq,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('You created a new Faq!');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//CREATE a new FAQ article End
+
+//UPDATE FORM FAQ article Start
+let createFaqIdInput = (id) => {//this formats the data for the graphql query to use.
+    return {
+            "input": id
+    };
+};
+
+$(document).on('click', '.update', function(e) {
+    e.preventDefault();
+    let id = $(this).attr('id'),
+        data = createFaqIdInput(id);
+
+        $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: getFaqById,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    //console.log(response);
+                    faqs = response.data.getFaq ;
+
+                    displayUpdateFaqForm(faqs);
+                    location.href = "#form";
+
+                }
+        });
+});
+//UPDATE FORM FAQ article End
+
+//UPDATE FAQ article Start
+let updateFaqInput = (id,displayOrder, question, answer) => {
+    return {
+        "input": {
+            "id": id,
+            "displayOrder": displayOrder,
+            "question": question,
+            "answer": answer
+        }
+    };
+};
+
+$(document).on('click', 'button.updateFaq', function() {
+    let id = $(".updateFaq").data("id"),
+        displayOrder = $('#displayOrder').val(),
+        question = $('#question').val(),
+        answer = $('#answer').val(),
+        data = updateFaqInput(id,displayOrder, question, answer);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: updateFaq,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('Updated!');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//UPDATE FAQ article End
+
+//DELETE FAQ article Start
+$(document).on('click', 'a.deleteFaq', function(event){
+    event.preventDefault();
+
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
+
+            // Go to db and delete
+            let deleteInput = (id) => {
+                return {
+                    "input": {
+                        "id": id
+                    }
+                };
+            };
+
+            let id = $(this).attr('id'),
+                data = deleteInput(id);
+
+            $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: deleteFaq,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + Cookies.get('token')
+                },
+                success: function(response) {
+                    if (response.hasOwnProperty('data')) {
+                        alert('Deleted an FAQ!');
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, response) {
+                    if (response.hasOwnProperty('errors')) {
+                        alert(response.errors[0].message);
+                    }
+                }
+            });
+        }
+});
+//DELETE FAQ article End
+
+// END - FAQ *** FAQ *** FAQ *** FAQ *** FAQ *** FAQ
+
 import { getAllAwards } from '../award/model';
 import { displayAwards } from '../award/view';
 
@@ -524,7 +723,7 @@ $.ajax({
                     faqs.push(faq.node);
                 }
             }
-            console.log(faqs);
+            // console.log(faqs);
             displayFaqs(faqs);
         }
 });

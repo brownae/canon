@@ -247,6 +247,97 @@ export let displayUpdateAwardsForm = () => {
 
 //AWARDS SECTION END
 
+//FAQ SECTION START
+// FAQ table Start ///////////////
+export let displayFaqTable = (faq) => {
+    let table =
+    `<table class='faq'><!-- Keep class capitalized -->
+        <tr>
+            <th>Display Order</th>
+            <th>Question</th>
+            <th>Answer</th>
+        </tr>`;
+
+        faqs.forEach(function(faq) {
+        table +=  `<tr>
+                <td>${faq.displayOrder}</td>
+                <td>${faq.question}</td>
+                <td>${faq.answer}</td>
+                <td><a href="" id='${faq.id}' class='update'>Update</a>
+                <a href="" id='${faq.id}' class='deleteFaq'>Delete</a></td>
+        </tr>`;
+        });
+
+        table += `</table>
+        <div id='admin-button'>
+        <button type="button" name="add-faq-form" id="add-faq-form" class='addEntry' >Add</button>
+        <div>
+        <a name="form">
+        `;
+
+    $('#tableContent').append(table);//loads what is requested
+
+};
+// FAQ table End ///////////////
+// FAQ form Start ///////////////
+export let displayNewFaqForm = () => {
+
+        let form = `
+            <form action="#" method="post" class="">
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" placeholder="(Number)">
+                </div>
+
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <input type="text" class="form-control" id="question" name="question" placeholder="Do you ? ... ">
+                </div>
+
+                <div class="form-group">
+                    <label for="answer">Answer</label>
+                    <input type="text" class="form-control" id="answer" name="answer" placeholder="Yes we ...">
+                </div>
+
+                <div class="form-group">
+                    <button id="create-faq-button" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+};
+// NEW FAQ form END ///////////////
+export let displayUpdateFaqForm = (faq) => {
+
+        let form = `
+            <form action="#" method="post" class="">
+            <h2>Update:${faq.question}<h2>
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" value="${faq.displayOrder}">
+                </div>
+
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <input type="text" class="form-control" id="question" name="question" value="${faq.question}">
+                </div>
+
+                <div class="form-group">
+                    <label for="answer">Answer</label>
+                    <input type="text" class="form-control" id="answer" name="answer" value="${faq.answer}">
+                </div>
+
+                <div class="form-group">
+                    <button class="updateFaq" data-id="${faq.id}" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
+// UPDATE FAQ form END ///////////////
+//FAQ SECTION END
 
 // menu form Start ///////////////
 export let displayMenuForm = (menu) => {
