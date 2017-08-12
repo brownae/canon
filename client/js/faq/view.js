@@ -7,8 +7,8 @@ export let displayFaqs = (faqs) => {
         //console.log(faq);
 
         const faqTemplate = `
-            <p class="question"> Do I have to have a reservation?</p>
-            <p class="answer">No, we accept walk-ins but if you want a guaranteed spot you should make a reservation</p>
+            <p class="question">${faq.question}</p>
+            <p class="answer">${faq.answer}</p>
         `;
 
         $('.content-faq').append(faqTemplate);
