@@ -18090,6 +18090,7 @@ const getAllProducts = `
                         productName
                         productType
                         productSpecs
+                        displayOrder
                         productDescription
                         productPrice
                         productForPurchaseAt
@@ -18148,6 +18149,10 @@ $.ajax({
                     abouts.push(about.node);
                 }
             }
+            // orders array by displayOrder
+            abouts.sort(function(a,b){
+                if (a.displayOrder > b.displayOrder) return  1;
+            });
             displayAbouts(abouts);
         }
 });
@@ -18174,6 +18179,10 @@ $("[name='page-select']").change(function(event){
                                 abouts.push(about.node);
                             }
                         }
+                        // orders array by displayOrder
+                        abouts.sort(function(a,b){
+                            if (a.displayOrder > b.displayOrder) return  1;
+                        });
                         displayAboutsTable(abouts);
                     }
             });
@@ -18219,7 +18228,10 @@ $("[name='page-select']").change(function(event){
                                 faqs.push(faq.node);
                             }
                         }
-                        // console.log(faqs);
+                        // orders array by displayOrder
+                        faqs.sort(function(a,b){
+                            if (a.displayOrder > b.displayOrder) return  1;
+                        });
                         displayFaqTable(faqs);
                     }
             });
@@ -18843,6 +18855,10 @@ $.ajax({
                     faqs.push(faq.node);
                 }
             }
+            // orders array by displayOrder
+            faqs.sort(function(a,b){
+                if (a.displayOrder > b.displayOrder) return  1;
+            });
             // console.log(faqs);
             displayFaqs(faqs);
         }
@@ -18900,6 +18916,10 @@ $.ajax({
                     products.push(product.node);
                 }
             }
+            // orders array by displayOrder
+            products.sort(function(a,b){
+                if (a.displayOrder > b.displayOrder) return  1;
+            });
             displayProducts(products);
         }
 });

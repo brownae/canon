@@ -17,6 +17,10 @@ $.ajax({
                     abouts.push(about.node);
                 }
             }
+            // orders array by displayOrder
+            abouts.sort(function(a,b){
+                if (a.displayOrder > b.displayOrder) return  1;
+            });
             displayAbouts(abouts);
         }
 });

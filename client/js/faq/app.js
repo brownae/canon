@@ -17,6 +17,10 @@ $.ajax({
                     faqs.push(faq.node);
                 }
             }
+            // orders array by displayOrder
+            faqs.sort(function(a,b){
+                if (a.displayOrder > b.displayOrder) return  1;
+            });
             // console.log(faqs);
             displayFaqs(faqs);
         }

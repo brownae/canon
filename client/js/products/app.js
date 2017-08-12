@@ -17,6 +17,10 @@ $.ajax({
                     products.push(product.node);
                 }
             }
+            // orders array by displayOrder
+            products.sort(function(a,b){
+                if (a.displayOrder > b.displayOrder) return  1;
+            });
             displayProducts(products);
         }
 });

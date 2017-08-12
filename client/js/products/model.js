@@ -13,6 +13,7 @@ export const getAllProducts = `
                         productName
                         productType
                         productSpecs
+                        displayOrder
                         productDescription
                         productPrice
                         productForPurchaseAt

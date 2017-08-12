@@ -506,7 +506,7 @@ main#awardsPage {
 
 main#aboutPage {
   display: flex;
-  flex-direction: column-reverse; }
+  flex-direction: column; }
 
 button {
   display: inline-block;
