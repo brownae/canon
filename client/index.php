@@ -35,7 +35,7 @@
             <img src="img/cta-bottle-library.png" alt="Bottle Library for Canon restaurant">
         </div>
         <div class="cta cta4">
-            <a href="#" ><h2>Book</h2></a>
+            <a href="products.php" ><h2>Shop</h2></a>
             <img src="img/cta-book.png" alt="Book for Canon restaurant">
         </div>
     </div>
