@@ -10,10 +10,10 @@ export const getAllProducts = `
                         id
                         modifiedAt
                         createdAt
+                        displayOrder
                         productName
                         productType
                         productSpecs
-                        displayOrder
                         productDescription
                         productPrice
                         productForPurchaseAt

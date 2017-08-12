@@ -65,7 +65,7 @@ export let displayNewAboutForm = () => {
                 </div>
 
                 <div class="form-group">
-                    <button id="create-about-button" type="button">Update</button>
+                    <button id="create-about-button" type="button">Create</button>
                 </div>
             </form>`;
 
@@ -114,7 +114,7 @@ export let displayUpdateAboutForm = (about) => {
 
 };
 // UPDATE About form END ///////////////
-//ABOUT SECTION END
+//ABOUT SECTION END ABOUT END ABOUT END
 
 //AWARDS SECTION START
 // Awards table Start ///////////////
@@ -193,7 +193,7 @@ export let displayNewAwardsForm = () => {
                 </div>
 
                 <div class="form-group">
-                    <button id="create-award-button" type="button">Update</button>
+                    <button id="create-award-button" type="button">Create</button>
                 </div>
             </form>`;
 
@@ -300,7 +300,7 @@ export let displayNewFaqForm = () => {
                 </div>
 
                 <div class="form-group">
-                    <button id="create-faq-button" type="button">Update</button>
+                    <button id="create-faq-button" type="button">Create</button>
                 </div>
             </form>`;
 
@@ -369,3 +369,180 @@ export let displayMenuForm = (menu) => {
     });
 };
 // menu form End ///////////////
+
+//PRODUCT SECTION START
+// PRODUCT table Start ///////////////
+export let displayProductsTable = (product) => {
+    let table =
+    `<table class='product'>
+        <tr>
+            <th>Display Order</th>
+            <th>Product name</th>
+            <th>Product type</th>
+            <th>Specs</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Purchase at</th>
+            <th>Purchase at URL</th>
+            <th>In stock?</th>
+            <th>Image name</th>
+        </tr>`;
+
+        products.forEach(function(product) {
+        table +=  `<tr>
+                <td>${product.displayOrder}</td>
+                <td>${product.productName}</td>
+                <td>${product.productType}</td>
+                <td>${product.productSpecs}</td>
+                <td>${product.productDescription}</td>
+                <td>${product.productPrice}</td>
+                <td>${product.productForPurchaseAt}</td>
+                <td>${product.productForPurchaseAtURL}</td>
+                <td>${product.productInStock}</td>
+                <td>${product.productImg}</td>
+                <td><a href="" id='${product.id}' class='updateProduct'>Update</a>
+                <a href="" id='${product.id}' class='deleteProduct'>Delete</a></td>
+        </tr>`;
+        });
+
+        table += `</table>
+        <div id='admin-button'>
+        <button type="button" name="add-product-form" id="add-product-form" class='addEntry' >Add</button>
+        <div>
+        <a name="form">
+        `;
+
+    $('#tableContent').append(table);//loads what is requested
+
+};
+// PRODUCT table End ///////////////
+// PRODUCT form Start ///////////////
+export let displayNewProductForm = () => {
+
+        let form = `
+            <form action="#" method="post" class="">
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" placeholder="(Number)">
+                </div>
+
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" class="form-control" id="productName" name="productName" placeholder="Orange Bitters">
+                </div>
+
+                <div class="form-group">
+                    <label for="productType">Product Type</label>
+                    <input type="text" class="form-control" id="productType" name="productType" placeholder="ex: Alcohol,Apparel,Media">
+                </div>
+
+                <div class="form-group">
+                    <label for="productSpecs">Specs</label>
+                    <input type="text" class="form-control" id="productSpecs" name="productSpecs" placeholder="3oz bottle">
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Delightful burst of dark citrus...">
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Price</label>
+                    <input type="text" class="form-control" id="productPrice" name="productPrice" placeholder="12.00">
+                </div>
+
+                <div class="form-group">
+                    <label for="productForPurchaseAt">Purchase at:</label>
+                    <input type="text" class="form-control" id="productForPurchaseAt" name="productForPurchaseAt" placeholder="Canon or Amazon">
+                </div>
+
+                <div class="form-group">
+                    <label for="productForPurchaseAtURL">Purchase at URL:</label>
+                    <input type="url" class="form-control" id="productForPurchaseAtURL" name="productForPurchaseAtURL" placeholder="https://www.amazon.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="productInStock">In stock?</label>
+                    <input type="text" class="form-control" id="productInStock" name="productInStock" placeholder="In Stock or Out of Stock">
+                </div>
+
+                <div class="form-group">
+                    <label for="productImg">Image name</label>
+                    <input type="text" class="form-control" id="productImg" name="productImg" placeholder="orange-bitters.jpg">
+                </div>
+
+                <div class="form-group">
+                    <button id="create-product-button" type="button">Create</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+};
+// NEW PRODUCT form END ///////////////
+
+export let displayUpdateProductForm = (product) => {
+
+        let form = `
+            <form action="#" method="post" class="">
+            <h2>Update: ${product.productName}<h2>
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" value="${product.displayOrder}">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="productName" name="productName" value="${product.productName}">
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Product Type</label>
+                    <input type="text" class="form-control" id="productType" name="productType" value="${product.productType}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productSpecs">Specs</label>
+                    <input type="text" class="form-control" id="productSpecs" name="content" value="${product.productSpecs}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <input type="text" class="form-control" id="productDescription" name="productDescription" value="${product.productDescription}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Price</label>
+                    <input type="text" class="form-control" id="productPrice" name="productPrice" value="${product.productPrice}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productForPurchaseAt">Purchase at</label>
+                    <input type="text" class="form-control" id="productForPurchaseAt" name="productForPurchaseAt" value="${product.productForPurchaseAt}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productForPurchaseAtURL">Purchase at URL</label>
+                    <input type="text" class="form-control" id="productForPurchaseAtURL" name="productForPurchaseAtURL" value="${product.productForPurchaseAtURL}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productInStock">In Stock?</label>
+                    <input type="text" class="form-control" id="productInStock" name="productInStock" value="${product.productInStock}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productImg">Image name</label>
+                    <input type="text" class="form-control" id="productImg" name="productImg" value="${product.productImg}">
+                </div>
+
+                <div class="form-group">
+                    <button id="updateProduct" data-id="${product.id}" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
+// UPDATE PRODUCT form END ///////////////
+//PRODUCT SECTION END

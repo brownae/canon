@@ -13,9 +13,9 @@
                     </ul>
                 <li><a href="awards.php">Awards</a></li>
                 <li><a href="products.php">Shop</a></li>
+                <li><a href="faq.php">FAQ</a></li>
                 <li><a href="about.php">About</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a href="faq.php">FAQ</a></li>
                 <li class="social-media">
                     <a href="#"><svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          width="40px" height="40px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">

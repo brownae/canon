@@ -188,3 +188,78 @@ mutation updateAllmenus($input:UpdateMenuInput!){
     }
   }
 }`;
+
+//CREATE product
+export const createProduct = `
+    mutation createProductQuery($input: CreateProductInput!) {
+        createProduct(input: $input) {
+            changedProduct {
+                id
+                modifiedAt
+                createdAt
+                displayOrder
+                productName
+                productType
+                productSpecs
+                productDescription
+                productPrice
+                productForPurchaseAt
+                productForPurchaseAtURL
+                productInStock
+                productImg
+            }
+        }
+    }`;
+
+//Delete product
+export const deleteProduct = `
+mutation deleteProductQuery($input: DeleteProductInput!) {
+  deleteProduct(input: $input) {
+    changedProduct {
+      id
+    }
+  }
+}
+`;
+//Update product
+export const updateProduct = `
+    mutation updateProductQuery($input: UpdateProductInput!) {
+        updateProduct(input: $input) {
+            changedProduct {
+                id
+                modifiedAt
+                createdAt
+                displayOrder
+                productName
+                productType
+                productSpecs
+                productDescription
+                productPrice
+                productForPurchaseAt
+                productForPurchaseAtURL
+                productInStock
+                productImg
+            }
+        }
+    }
+`;
+
+//get product with id
+export const getProductById = `
+query getProductById($input: ID!) {
+    getProduct(id: $input) {
+        id
+        modifiedAt
+        createdAt
+        displayOrder
+        productName
+        productType
+        productSpecs
+        productDescription
+        productPrice
+        productForPurchaseAt
+        productForPurchaseAtURL
+        productInStock
+        productImg
+    }
+}`;

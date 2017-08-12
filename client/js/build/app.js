@@ -17421,6 +17421,82 @@ const getAwardsById = `
 
 // Use this to base your UPDATE menu query
 
+
+//CREATE product
+const createProduct = `
+    mutation createProductQuery($input: CreateProductInput!) {
+        createProduct(input: $input) {
+            changedProduct {
+                id
+                modifiedAt
+                createdAt
+                displayOrder
+                productName
+                productType
+                productSpecs
+                productDescription
+                productPrice
+                productForPurchaseAt
+                productForPurchaseAtURL
+                productInStock
+                productImg
+            }
+        }
+    }`;
+
+//Delete product
+const deleteProduct = `
+mutation deleteProductQuery($input: DeleteProductInput!) {
+  deleteProduct(input: $input) {
+    changedProduct {
+      id
+    }
+  }
+}
+`;
+//Update product
+const updateProduct = `
+    mutation updateProductQuery($input: UpdateProductInput!) {
+        updateProduct(input: $input) {
+            changedProduct {
+                id
+                modifiedAt
+                createdAt
+                displayOrder
+                productName
+                productType
+                productSpecs
+                productDescription
+                productPrice
+                productForPurchaseAt
+                productForPurchaseAtURL
+                productInStock
+                productImg
+            }
+        }
+    }
+`;
+
+//get product with id
+const getProductById = `
+query getProductById($input: ID!) {
+    getProduct(id: $input) {
+        id
+        modifiedAt
+        createdAt
+        displayOrder
+        productName
+        productType
+        productSpecs
+        productDescription
+        productPrice
+        productForPurchaseAt
+        productForPurchaseAtURL
+        productInStock
+        productImg
+    }
+}`;
+
 //ABOUT SECTION START
 // About table Start ///////////////
 let displayAboutsTable = (about) => {
@@ -17488,7 +17564,7 @@ let displayNewAboutForm = () => {
                 </div>
 
                 <div class="form-group">
-                    <button id="create-about-button" type="button">Update</button>
+                    <button id="create-about-button" type="button">Create</button>
                 </div>
             </form>`;
 
@@ -17537,7 +17613,7 @@ let displayUpdateAboutForm = (about) => {
 
 };
 // UPDATE About form END ///////////////
-//ABOUT SECTION END
+//ABOUT SECTION END ABOUT END ABOUT END
 
 //AWARDS SECTION START
 // Awards table Start ///////////////
@@ -17616,7 +17692,7 @@ let displayNewAwardsForm = () => {
                 </div>
 
                 <div class="form-group">
-                    <button id="create-award-button" type="button">Update</button>
+                    <button id="create-award-button" type="button">Create</button>
                 </div>
             </form>`;
 
@@ -17723,7 +17799,7 @@ let displayNewFaqForm = () => {
                 </div>
 
                 <div class="form-group">
-                    <button id="create-faq-button" type="button">Update</button>
+                    <button id="create-faq-button" type="button">Create</button>
                 </div>
             </form>`;
 
@@ -17792,6 +17868,183 @@ let displayMenuForm = (menu) => {
     });
 };
 // menu form End ///////////////
+
+//PRODUCT SECTION START
+// PRODUCT table Start ///////////////
+let displayProductsTable = (product) => {
+    let table =
+    `<table class='product'>
+        <tr>
+            <th>Display Order</th>
+            <th>Product name</th>
+            <th>Product type</th>
+            <th>Specs</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Purchase at</th>
+            <th>Purchase at URL</th>
+            <th>In stock?</th>
+            <th>Image name</th>
+        </tr>`;
+
+        products.forEach(function(product) {
+        table +=  `<tr>
+                <td>${product.displayOrder}</td>
+                <td>${product.productName}</td>
+                <td>${product.productType}</td>
+                <td>${product.productSpecs}</td>
+                <td>${product.productDescription}</td>
+                <td>${product.productPrice}</td>
+                <td>${product.productForPurchaseAt}</td>
+                <td>${product.productForPurchaseAtURL}</td>
+                <td>${product.productInStock}</td>
+                <td>${product.productImg}</td>
+                <td><a href="" id='${product.id}' class='updateProduct'>Update</a>
+                <a href="" id='${product.id}' class='deleteProduct'>Delete</a></td>
+        </tr>`;
+        });
+
+        table += `</table>
+        <div id='admin-button'>
+        <button type="button" name="add-product-form" id="add-product-form" class='addEntry' >Add</button>
+        <div>
+        <a name="form">
+        `;
+
+    $('#tableContent').append(table);//loads what is requested
+
+};
+// PRODUCT table End ///////////////
+// PRODUCT form Start ///////////////
+let displayNewProductForm = () => {
+
+        let form = `
+            <form action="#" method="post" class="">
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" placeholder="(Number)">
+                </div>
+
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" class="form-control" id="productName" name="productName" placeholder="Orange Bitters">
+                </div>
+
+                <div class="form-group">
+                    <label for="productType">Product Type</label>
+                    <input type="text" class="form-control" id="productType" name="productType" placeholder="ex: Alcohol,Apparel,Media">
+                </div>
+
+                <div class="form-group">
+                    <label for="productSpecs">Specs</label>
+                    <input type="text" class="form-control" id="productSpecs" name="productSpecs" placeholder="3oz bottle">
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Delightful burst of dark citrus...">
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Price</label>
+                    <input type="text" class="form-control" id="productPrice" name="productPrice" placeholder="12.00">
+                </div>
+
+                <div class="form-group">
+                    <label for="productForPurchaseAt">Purchase at:</label>
+                    <input type="text" class="form-control" id="productForPurchaseAt" name="productForPurchaseAt" placeholder="Canon or Amazon">
+                </div>
+
+                <div class="form-group">
+                    <label for="productForPurchaseAtURL">Purchase at URL:</label>
+                    <input type="url" class="form-control" id="productForPurchaseAtURL" name="productForPurchaseAtURL" placeholder="https://www.amazon.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="productInStock">In stock?</label>
+                    <input type="text" class="form-control" id="productInStock" name="productInStock" placeholder="In Stock or Out of Stock">
+                </div>
+
+                <div class="form-group">
+                    <label for="productImg">Image name</label>
+                    <input type="text" class="form-control" id="productImg" name="productImg" placeholder="orange-bitters.jpg">
+                </div>
+
+                <div class="form-group">
+                    <button id="create-product-button" type="button">Create</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+};
+// NEW PRODUCT form END ///////////////
+
+let displayUpdateProductForm = (product) => {
+
+        let form = `
+            <form action="#" method="post" class="">
+            <h2>Update: ${product.productName}<h2>
+                <div class="form-group">
+                    <label for="displayOrder">Display Order</label>
+                    <input type="url" class="form-control" id="displayOrder" name="displayOrder" value="${product.displayOrder}">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="productName" name="productName" value="${product.productName}">
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Product Type</label>
+                    <input type="text" class="form-control" id="productType" name="productType" value="${product.productType}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productSpecs">Specs</label>
+                    <input type="text" class="form-control" id="productSpecs" name="content" value="${product.productSpecs}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <input type="text" class="form-control" id="productDescription" name="productDescription" value="${product.productDescription}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Price</label>
+                    <input type="text" class="form-control" id="productPrice" name="productPrice" value="${product.productPrice}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productForPurchaseAt">Purchase at</label>
+                    <input type="text" class="form-control" id="productForPurchaseAt" name="productForPurchaseAt" value="${product.productForPurchaseAt}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productForPurchaseAtURL">Purchase at URL</label>
+                    <input type="text" class="form-control" id="productForPurchaseAtURL" name="productForPurchaseAtURL" value="${product.productForPurchaseAtURL}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productInStock">In Stock?</label>
+                    <input type="text" class="form-control" id="productInStock" name="productInStock" value="${product.productInStock}">
+                </div>
+
+                <div class="form-group">
+                    <label for="productImg">Image name</label>
+                    <input type="text" class="form-control" id="productImg" name="productImg" value="${product.productImg}">
+                </div>
+
+                <div class="form-group">
+                    <button id="updateProduct" data-id="${product.id}" type="button">Update</button>
+                </div>
+            </form>`;
+
+    $('#tableContent').append(form);//loads what is requested
+
+
+};
+// UPDATE PRODUCT form END ///////////////
+//PRODUCT SECTION END
 
 //this is where I query the db and get the info and put it in a var
 
@@ -18087,10 +18340,10 @@ const getAllProducts = `
                         id
                         modifiedAt
                         createdAt
+                        displayOrder
                         productName
                         productType
                         productSpecs
-                        displayOrder
                         productDescription
                         productPrice
                         productForPurchaseAt
@@ -18258,8 +18511,32 @@ $("[name='page-select']").change(function(event){
                         displayMenuForm(menus);
                     }
             });
-
             break;
+            case 'products':
+                $('#tableContent').empty();//clears what was in div before
+                $.ajax({
+                        type: "POST",
+                        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                        data: JSON.stringify({
+                            query: getAllProducts
+                        }),
+                        contentType: 'application/json',
+                        success: function(response) {
+                            products = [];
+                            if (response.hasOwnProperty('data')) {
+                                let productEdges = response.data.viewer.allProducts.edges;
+                                for (var product of productEdges) {
+                                    products.push(product.node);
+                                }
+                            }
+                            // orders array by displayOrder
+                            products.sort(function(a,b){
+                                if (a.displayOrder > b.displayOrder) return  1;
+                            });
+                            displayProductsTable(products);
+                        }
+                });
+                break;
         default:
             $('#tableContent').empty();//clears what was in div before
             // code block
@@ -18460,7 +18737,7 @@ $(document).on('click', "#add-award-form", function() {
     displayNewAwardsForm();
 });
 
-//CREATE a new award article START
+//CREATE a new award START
     let createAwardInput = (imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
         return {
             "input": {
@@ -18508,9 +18785,9 @@ $(document).on('click', "#add-award-form", function() {
             }
         });
     });
-//CREATE a new award article END
+//CREATE a new award END
 
-//UPDATE FORM award article Start
+//UPDATE FORM award Start
 let createAwardIdInput = (id) => {//this formats the data for the graphql query to use.
     return {
             "input": id
@@ -18539,9 +18816,9 @@ $(document).on('click', 'a.updateAward', function(e) {
                 }
         });
 });
-//UPDATE FORM award article End
+//UPDATE FORM award End
 
-//UPDATE an award article START
+//UPDATE an award START
 let updateAwardInput = (id,imgName, awardTitle, awardFrom, awardSrcUrl, dateAwarded, comments) => {
     return {
         "input": {
@@ -18593,9 +18870,9 @@ $(document).on('click', 'button.updateAward', function() {
         }
     });
 });
-//UPDATE a new award article END
+//UPDATE a new award END
 
-//DELETE AWARD article Start
+//DELETE AWARD Start
 $(document).on('click', 'a.deleteAward', function(event){
     event.preventDefault();
 
@@ -18640,18 +18917,18 @@ $(document).on('click', 'a.deleteAward', function(event){
             });
         }
 });
-//DELETE AWARD article End
+//DELETE AWARD End
 
 // END - AWARD *** AWARD *** AWARD *** AWARD *** AWARD *** AWARD
 
 // START - FAQ *** FAQ *** FAQ *** FAQ *** FAQ *** FAQ
 
-// this pops down the form to add a new FAQ article
+// this pops down the form to add a new FAQ
 $(document).on('click', "#add-faq-form", function() {
     displayNewFaqForm();
 });
 
-//CREATE a new FAQ article Start
+//CREATE a new FAQ Start
 let createFaqInput = (displayOrder, question, answer) => {
     return {
         "input": {
@@ -18693,9 +18970,9 @@ $(document).on('click', '#create-faq-button', function() {
         }
     });
 });
-//CREATE a new FAQ article End
+//CREATE a new FAQ End
 
-//UPDATE FORM FAQ article Start
+//UPDATE FORM FAQ Start
 let createFaqIdInput = (id) => {//this formats the data for the graphql query to use.
     return {
             "input": id
@@ -18725,9 +19002,9 @@ $(document).on('click', '.update', function(e) {
                 }
         });
 });
-//UPDATE FORM FAQ article End
+//UPDATE FORM FAQ End
 
-//UPDATE FAQ article Start
+//UPDATE FAQ Start
 let updateFaqInput = (id,displayOrder, question, answer) => {
     return {
         "input": {
@@ -18770,9 +19047,9 @@ $(document).on('click', 'button.updateFaq', function() {
         }
     });
 });
-//UPDATE FAQ article End
+//UPDATE FAQ End
 
-//DELETE FAQ article Start
+//DELETE FAQ Start
 $(document).on('click', 'a.deleteFaq', function(event){
     event.preventDefault();
 
@@ -18816,9 +19093,215 @@ $(document).on('click', 'a.deleteFaq', function(event){
             });
         }
 });
-//DELETE FAQ article End
+//DELETE FAQ End
 
 // END - FAQ *** FAQ *** FAQ *** FAQ *** FAQ *** FAQ
+
+// START - PRODUCT *** PRODUCT *** PRODUCT *** PRODUCT *** PRODUCT *** PRODUCT
+
+// this pops down the form to add a new PRODUCT
+$(document).on('click', "#add-product-form", function() {
+    displayNewProductForm();
+});
+
+//CREATE a new PRODUCT Start
+let createProductInput = (displayOrder, productName,productType, productSpecs, productDescription, productPrice, productForPurchaseAt, productForPurchaseAtURL, productInStock,productImg) => {
+    return {
+        "input": {
+            "displayOrder": displayOrder,
+            "productName" : productName,
+            "productType" : productType,
+            "productSpecs" : productSpecs,
+            "productDescription" : productDescription,
+            "productPrice" : productPrice,
+            "productForPurchaseAt" : productForPurchaseAt,
+            "productForPurchaseAtURL" : productForPurchaseAtURL,
+            "productInStock" : productInStock,
+            "productImg" : productImg
+        }
+    };
+};
+
+$(document).on('click', '#create-product-button', function() {
+
+    let displayOrder = $('#displayOrder').val(),
+        productName = $('#productName').val(),
+        productType = $('#productType').val(),
+        productSpecs = $('#productSpecs').val(),
+        productDescription = $('#productDescription').val(),
+        productPrice = $('#productPrice').val(),
+        productForPurchaseAt = $('#productForPurchaseAt').val(),
+        productForPurchaseAtURL = $('#productForPurchaseAtURL').val(),
+        productInStock = $('#productInStock').val(),
+        productImg = $('#productImg').val(),
+
+        data = createProductInput(displayOrder, productName,productType, productSpecs, productDescription, productPrice, productForPurchaseAt, productForPurchaseAtURL, productInStock,productImg);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: createProduct,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('You created a new Product!');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//CREATE a new PRODUCT End
+
+//UPDATE FORM PRODUCT Start
+let createProductIdInput = (id) => {//this formats the data for the graphql query to use.
+    return {
+            "input": id
+    };
+};
+
+$(document).on('click', '.updateProduct', function(e) {
+    e.preventDefault();
+    let id = $(this).attr('id'),
+        data = createProductIdInput(id);
+
+        $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: getProductById,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    //console.log(response);
+                    product = response.data.getProduct ;
+
+                    displayUpdateProductForm(product);
+                    location.href = "#form";
+
+                }
+        });
+});
+//UPDATE FORM PRODUCT End
+
+//UPDATE PRODUCT Start
+let updateProductInput = (id,displayOrder, productName,productType, productSpecs, productDescription, productPrice, productForPurchaseAt, productForPurchaseAtURL, productInStock,productImg) => {
+    return {
+        "input": {
+            "id": id,
+            "displayOrder": displayOrder,
+            "productName" : productName,
+            "productType" : productType,
+            "productSpecs" : productSpecs,
+            "productDescription" : productDescription,
+            "productPrice" : productPrice,
+            "productForPurchaseAt" : productForPurchaseAt,
+            "productForPurchaseAtURL" : productForPurchaseAtURL,
+            "productInStock" : productInStock,
+            "productImg" : productImg
+        }
+    };
+};
+
+$(document).on('click', 'button#updateProduct', function() {
+    let id = $("#updateProduct").data("id"),
+        displayOrder = $('#displayOrder').val(),
+        productName = $('#productName').val(),
+        productType = $('#productType').val(),
+        productSpecs = $('#productSpecs').val(),
+        productDescription = $('#productDescription').val(),
+        productPrice = $('#productPrice').val(),
+        productForPurchaseAt = $('#productForPurchaseAt').val(),
+        productForPurchaseAtURL = $('#productForPurchaseAtURL').val(),
+        productInStock = $('#productInStock').val(),
+        productImg = $('#productImg').val(),
+
+        data = updateProductInput(id,displayOrder, productName,productType, productSpecs, productDescription, productPrice, productForPurchaseAt, productForPurchaseAtURL, productInStock,productImg);
+
+    $.ajax({
+        type: "POST",
+        url: "https://us-west-2.api.scaphold.io/graphql/canon",
+        data: JSON.stringify({
+            query: updateProduct,
+            variables: data
+        }),
+        contentType: 'application/json',
+        headers: {
+            'Authorization': 'Bearer ' + Cookies.get('token')
+        },
+        success: function(response) {
+            if (response.hasOwnProperty('data')) {
+                alert('Updated!');
+                location.reload();
+            }
+        },
+        error: function(xhr, status, response) {
+            if (response.hasOwnProperty('errors')) {
+                alert(response.errors[0].message);
+            }
+        }
+    });
+});
+//UPDATE PRODUCT End
+
+//DELETE PRODUCT Start
+$(document).on('click', 'a.deleteProduct', function(event){
+    event.preventDefault();
+
+    let delConfirm = confirm('Are you sure you want to delete?');
+        if (delConfirm === true){
+
+            // Go to db and delete
+            let deleteInput = (id) => {
+                return {
+                    "input": {
+                        "id": id
+                    }
+                };
+            };
+
+            let id = $(this).attr('id'),
+                data = deleteInput(id);
+
+            $.ajax({
+                type: "POST",
+                url: "https://us-west-2.api.scaphold.io/graphql/canon",
+                data: JSON.stringify({
+                    query: deleteProduct,
+                    variables: data
+                }),
+                contentType: 'application/json',
+                headers: {
+                    'Authorization': 'Bearer ' + Cookies.get('token')
+                },
+                success: function(response) {
+                    if (response.hasOwnProperty('data')) {
+                        alert('Product Deleted!');
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, response) {
+                    if (response.hasOwnProperty('errors')) {
+                        alert(response.errors[0].message);
+                    }
+                }
+            });
+        }
+});
+//DELETE PRODUCT End
+
+// END - PRODUCT *** PRODUCT *** PRODUCT *** PRODUCT *** PRODUCT *** PRODUCT
 
 $.ajax({
         type: "POST",
