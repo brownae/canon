@@ -14,7 +14,9 @@
                 <option value="null"></option>
                 <option value="about">About</option>
                 <option value="awards">Awards</option>
+                <option value="faqs">FAQs</option>
                 <option value="menu">Menu</option>
+                <option value="shop">Shop</option>
             </select>
         </div>
     </form>
