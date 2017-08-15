@@ -1,7 +1,6 @@
 $(function() {
 
 if(isMobileDevice() === true){
-
     let imgHead = `
     <div class="slider">
         <div class='slide1'></div>
@@ -44,6 +43,23 @@ if(isMobileDevice() === true){
     }
 
 
+    // Modal Start
+    $(document).on('click','a.contact',function(){
+        var buttonId = $(this).attr('id');
+        $('#modal-container').removeAttr('class').addClass(buttonId);
+        $('body').addClass('modal-active');
+    });
+
+    $(document).on('click','#modal-container',function(){
+        $(this).addClass('out');
+        $('body').removeClass('modal-active');
+
+    });
+    // Modal End
+
+    // $(document).on('click', "a.contact", function() {
+    //     alert("Email: fakeEmail@canonseattle.com\nPhone:(206)552-9755\n928 12th Ave, Seattle, WA 98122");
+    // });
 
 });//close on load function
 

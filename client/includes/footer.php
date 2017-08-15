@@ -1,5 +1,5 @@
 <footer>
-    <a href="https://www.google.com/maps/place/Canon/@47.613107,-122.323236,14z/data=!4m5!3m4!1s0x54906acedccc024d:0x7dfc130bbac8f648!8m2!3d47.6112773!4d-122.3165001?hl=en">
+    <a href="https://www.google.com/maps/place/Canon/@47.613107,-122.323236,14z/data=!4m5!3m4!1s0x54906acedccc024d:0x7dfc130bbac8f648!8m2!3d47.6112773!4d-122.3165001?hl=en" target="_blank">
         <img src="img/canon-map-zoom.png" alt="Canon map">
     </a>
     <div class="utility-menu">
@@ -15,7 +15,7 @@
                 <li><a href="products.php">Shop</a></li>
                 <li><a href="faq.php">FAQ</a></li>
                 <li><a href="about.php">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#" class="contact" id='six'>Contact</a></li>
                 <li class="social-media">
                     <a href="#"><svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          width="40px" height="40px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
@@ -58,6 +58,7 @@ http://all-free-download.com/free-vector/download/vintage_labels_and_borders_vec
 -->
 <!-- Where video Background came from. // Credit goes to Alan Casey for background video.
 // https://codepen.io/TheRealAlan/pen/oLLrZp-->
+<!-- Modal came from jesse couch - https://codepen.io/designcouch/pen/obvKxm -->
 
 </footer>
 <script src="js/build/app.js" charset="utf-8"></script>

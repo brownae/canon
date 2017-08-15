@@ -29,4 +29,4 @@ $(function() { // DOM Ready
      $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
    });
 //test
-});
+}); //DOM ready END
