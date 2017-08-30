@@ -8,22 +8,6 @@
         <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
-        <!-- This is for contact info -->
-        <div id="modal-container">
-            <div class="modal-background">
-                <div class="modal">
-                    <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
-                        <rect x="0" y="0" fill="none" width="455" height="240" rx="3" ry="3"></rect>
-                    </svg>
-                    <h2>Contact</h2>
-                    <p>Address: <a href="https://www.google.com/maps/place/Canon/@47.613107,-122.323236,14z/data=!4m5!3m4!1s0x54906acedccc024d:0x7dfc130bbac8f648!8m2!3d47.6112773!4d-122.3165001?hl=en" target="_blank"> 928 12th Ave, Seattle, WA 98122</a></p>
-                    <p>Email: <a href="mailto:fakeEmail@canonseattle.com">fakeEmail@canonseattle.com</a></p>
-                    <p>Phone:<a href="tel:+1-206-552-9755"> (206) 552-9755</a></p>
-                </div>
-            </div>
-        </div>
-        <!-- This is for contact info -->
-
         <div id="wrapper">
             <section class="navigation">
                 <div class="nav-container">
