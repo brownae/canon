@@ -49,8 +49,8 @@ table {
   border-spacing: 0; }
 
 @font-face {
-  font-family: 'atwriter';
-  src: url("../fonts/atwriter.ttf") format("truetype");
+  font-family: 'amerTypewriter';
+  src: url("../fonts/AmericanTypewriter.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 
@@ -815,7 +815,7 @@ html {
 
 body {
   color: #fff;
-  font-family: "atwriter", serif;
+  font-family: "amerTypewriter", serif;
   line-height: 1.2em;
   width: 100%;
   font-size: 1em; }
