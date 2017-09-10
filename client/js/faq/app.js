@@ -18,9 +18,7 @@ $.ajax({
                 }
             }
             // orders array by displayOrder
-            faqs.sort(function(a,b){
-                if (a.displayOrder > b.displayOrder) return  1;
-            });
+            faqs.sort(function(a,b) {return (a.displayOrder > b.displayOrder) ? 1 : ((b.displayOrder > a.displayOrder) ? -1 : 0);} );
             // console.log(faqs);
             displayFaqs(faqs);
         }
