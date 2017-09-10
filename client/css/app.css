@@ -783,6 +783,8 @@ img.text-divider1 {
     position: absolute;
     height: 100%;
     width: 100%; }
+    .cta a:hover {
+      color: inherit; }
   .cta h2 {
     font-size: 2.5em;
     text-align: center;
