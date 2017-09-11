@@ -74,6 +74,8 @@ http://all-free-download.com/free-vector/download/vintage_labels_and_borders_vec
 <!-- Where video Background came from. // Credit goes to Alan Casey for background video.
 // https://codepen.io/TheRealAlan/pen/oLLrZp-->
 <!-- Modal came from jesse couch - https://codepen.io/designcouch/pen/obvKxm -->
+<!-- Nav bar based off of this tutorial
+https://www.taniarascia.com/responsive-dropdown-navigation-bar/#! -->
 
 </footer>
 <script src="js/build/app.js" charset="utf-8"></script>
