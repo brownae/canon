@@ -18151,7 +18151,7 @@ $(function() { // DOM Ready
     });
 
     //this makes the menu hide again if someone clicks outside of the nav(ie on the html)
-    $('html').click(function() {
+    $('html').on('click',function() {
         $('.nav-dropdown').hide();
     });
 
@@ -18322,9 +18322,9 @@ let displayMenus = (menus) => {
     menus.forEach(function(menu) {
 
         const menuTemplate = `
-            <li><a href="${menu.foodUrl}" >Food</a></li>
-            <li><a href="${menu.cocktailsUrl}" >Cocktails</a></li>
-            <li><a href="${menu.bottlesUrl}" >Bottles</a></li>
+            <li><a href="${menu.foodUrl}" target="_blank" >Food</a></li>
+            <li><a href="${menu.cocktailsUrl} "target="_blank" >Cocktails</a></li>
+            <li><a href="${menu.bottlesUrl}" target="_blank" >Bottles</a></li>
         `;
 
         const food = menu.foodUrl;

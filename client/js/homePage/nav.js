@@ -10,7 +10,7 @@ $(function() { // DOM Ready
     });
 
     //this makes the menu hide again if someone clicks outside of the nav(ie on the html)
-    $('html').click(function() {
+    $('html').on('click',function() {
         $('.nav-dropdown').hide();
     });
 
