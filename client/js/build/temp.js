@@ -227,7 +227,7 @@ let createAboutIdInput = (id) => {//this formats the data for the graphql query 
     };
 };
 
-$(document).on('click', '.update', function(e) {
+$(document).on('click', 'a.updateAboutForm', function(e) {
     e.preventDefault();
     let id = $(this).attr('id'),
         data = createAboutIdInput(id);

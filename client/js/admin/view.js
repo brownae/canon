@@ -18,7 +18,7 @@ export let displayAboutsTable = (about) => {
                 <td>${about.title}</td>
                 <td>${about.content}</td>
                 <td>${about.imgName}</td>
-                <td><a href="" id='${about.id}' class='update'>Update</a>
+                <td><a href="" id='${about.id}' class='updateAboutForm'>Update</a>
                 <a href="" id='${about.id}' class='deleteAbout'>Delete</a></td>
         </tr>`;
         });

@@ -17517,7 +17517,7 @@ let displayAboutsTable = (about) => {
                 <td>${about.title}</td>
                 <td>${about.content}</td>
                 <td>${about.imgName}</td>
-                <td><a href="" id='${about.id}' class='update'>Update</a>
+                <td><a href="" id='${about.id}' class='updateAboutForm'>Update</a>
                 <a href="" id='${about.id}' class='deleteAbout'>Delete</a></td>
         </tr>`;
         });
@@ -18621,7 +18621,7 @@ let createAboutIdInput = (id) => {//this formats the data for the graphql query 
     };
 };
 
-$(document).on('click', '.update', function(e) {
+$(document).on('click', 'a.updateAboutForm', function(e) {
     e.preventDefault();
     let id = $(this).attr('id'),
         data = createAboutIdInput(id);
