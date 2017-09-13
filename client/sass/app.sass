@@ -258,13 +258,22 @@ table
             color: $blue
 
 footer
+    background-color: $lightGrey
     @include desktop
-        background-color: $lightGrey
         padding: 20px
         overflow: auto
         img
             width: 50%
             float: right
+    small
+        background-color: $lightGrey
+        font-size: 12px
+        display: flex
+        justify-content: center
+        a
+            color: $black
+            &:hover
+                color: $link-hover-color
 
 .columns
     column-width: 8em

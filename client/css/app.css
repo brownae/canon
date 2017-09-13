@@ -1017,14 +1017,24 @@ table {
   table td a {
     color: #4286f4; }
 
-@media (min-width: 1200px) {
-  footer {
+footer {
+  background-color: #bababa; }
+  @media (min-width: 1200px) {
+    footer {
+      padding: 20px;
+      overflow: auto; }
+      footer img {
+        width: 50%;
+        float: right; } }
+  footer small {
     background-color: #bababa;
-    padding: 20px;
-    overflow: auto; }
-    footer img {
-      width: 50%;
-      float: right; } }
+    font-size: 12px;
+    display: flex;
+    justify-content: center; }
+    footer small a {
+      color: #000000; }
+      footer small a:hover {
+        color: #ffde4c; }
 
 .columns {
   column-width: 8em; }
