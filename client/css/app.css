@@ -1026,14 +1026,17 @@ footer {
       footer img {
         width: 50%;
         float: right; } }
-  footer small {
+
+p.bakedBy {
+  margin: 0; }
+  p.bakedBy small {
     background-color: #bababa;
     font-size: 12px;
     display: flex;
     justify-content: center; }
-    footer small a {
+    p.bakedBy small a {
       color: #000000; }
-      footer small a:hover {
+      p.bakedBy small a:hover {
         color: #ffde4c; }
 
 .columns {

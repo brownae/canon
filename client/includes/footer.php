@@ -67,7 +67,7 @@
         </div>
     </div>
 
-<p><small><a href="http://browniewd.com/">Site baked by - Brownie Web Design </a></small></p>
+
 
 <!-- Where page divider came from. http://all-free-download.com/free-vector/download/vector-set-of-ornamental-design-rule-lines_569779.html http://all-free-download.com/free-vector/download/floral_design_elements_vintage_dividers_vector_set_570115_download.html
 http://all-free-download.com/free-vector/download/vintage_labels_and_borders_vector_520817_download.html
@@ -79,6 +79,7 @@ http://all-free-download.com/free-vector/download/vintage_labels_and_borders_vec
 https://www.taniarascia.com/responsive-dropdown-navigation-bar/#! -->
 
 </footer>
+<p class="bakedBy"><small><a href="http://brownie.design/">Site baked by - Brownie Web Design </a></small></p>
 <script src="js/build/app.js" charset="utf-8"></script>
     </div> <!-- Close - div with id='wrapper' -->
 </body>
