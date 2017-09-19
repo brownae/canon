@@ -3,9 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cannon</title>
-        <!-- <link rel="stylesheet" href="css/skeleton.css"> -->
-        <link rel="stylesheet" href="css/app.css">
+        <title>Cannon - Whiskey &amp; Bitters Emporium</title>
+        <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+        <meta name="robots" content="noindex,nofollow" />
+        <link rel="stylesheet" href="css/app.css" />
     </head>
     <body>
         <div id="wrapper">
